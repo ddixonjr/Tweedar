@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TDRTweetsNearMeViewController.h
 //  Tweedar
 //
 //  Created by Dennis Dixon on 10/24/14.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface TDRTweetsNearMeViewController : UIViewController
 
 @end
-
