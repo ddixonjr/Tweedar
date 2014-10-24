@@ -14,6 +14,7 @@
 		953FD54719FAB63700837367 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953FD54519FAB63700837367 /* LaunchScreen.xib */; };
 		953FD55319FAB63700837367 /* TweedarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 953FD55219FAB63700837367 /* TweedarTests.m */; };
 		953FD55E19FAB80300837367 /* TDRTweetsNearMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 953FD55D19FAB80300837367 /* TDRTweetsNearMeViewController.m */; };
+		953FD56019FAE90400837367 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953FD55F19FAE90400837367 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		953FD55219FAB63700837367 /* TweedarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweedarTests.m; sourceTree = "<group>"; };
 		953FD55C19FAB80300837367 /* TDRTweetsNearMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRTweetsNearMeViewController.h; sourceTree = "<group>"; };
 		953FD55D19FAB80300837367 /* TDRTweetsNearMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRTweetsNearMeViewController.m; sourceTree = "<group>"; };
+		953FD55F19FAE90400837367 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953FD56019FAE90400837367 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				953FD53519FAB63700837367 /* Tweedar */,
+				953FD56119FAE91700837367 /* Frameworks */,
 				953FD54F19FAB63700837367 /* TweedarTests */,
 				953FD53419FAB63700837367 /* Products */,
 			);
@@ -117,6 +121,14 @@
 				953FD55119FAB63700837367 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		953FD56119FAE91700837367 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				953FD55F19FAE90400837367 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -15,9 +15,23 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3Wi-Ve-vDM">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3Wi-Ve-vDM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="5g1-i6-6SB"/>
+                            <constraint firstItem="3Wi-Ve-vDM" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="RR0-1C-mpk"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="3Wi-Ve-vDM" secondAttribute="bottom" id="W0S-MR-IgX"/>
+                            <constraint firstAttribute="trailing" secondItem="3Wi-Ve-vDM" secondAttribute="trailing" id="rV2-QR-f7D"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tweets Near Me" id="ic2-Yg-9Vc"/>
+                    <connections>
+                        <outlet property="tweetsMapView" destination="3Wi-Ve-vDM" id="v8I-yX-W5A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
