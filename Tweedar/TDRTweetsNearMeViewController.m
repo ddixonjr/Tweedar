@@ -45,7 +45,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *tweetCell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
-    tweetCell.textLabel.text = self.tweets[indexPath.row];
+    NSDictionary *curTweet = self.tweets[indexPath.row];
+    tweetCell.textLabel.text = curTweet[@"created_at"];
     return tweetCell;
 }
 
@@ -65,28 +66,47 @@
     self.tweetsTableView.delegate = self;
     self.tweetsTableView.dataSource = self;
 
-    self.tweets = @[@"Tweet One", @"Tweet Two", @"Tweet Three"];
+//    self.tweets = @[@"Tweet One", @"Tweet Two", @"Tweet Three"];
 }
-
-
 
 - (void)getTweetsNearMe
 {
     NSURL *tweetsURL = [NSURL URLWithString:kTwitterAPIURL];
     NSDictionary *paramDictionary = @{@"geocode":@"40.1323882,-75.1379737,1mi",@"result_type":@"recent"};
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *twitterAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
 
-    self.twRequest = [[TWRequest alloc] initWithURL:tweetsURL parameters:paramDictionary requestMethod:TWRequestMethodGET];
-    [self.twRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (responseData)
+    [accountStore requestAccessToAccountsWithType:twitterAccountType options:nil completion:^(BOOL granted, NSError *error) {
+        if (granted)
         {
-            NSError *jsonSerializationError = nil;
-            self.tweetsDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonSerializationError];
-            if (!jsonSerializationError)
-            {
-                NSLog(@"Tweets Near Me Dictionary: %@",self.tweetsDictionary);
-            }
+            NSArray *twitterAccounts = [accountStore accountsWithAccountType:twitterAccountType];
+            NSLog(@"twitterAccounts: %@",twitterAccounts);
+
+            self.twRequest = [[TWRequest alloc] initWithURL:tweetsURL parameters:paramDictionary requestMethod:TWRequestMethodGET];
+            self.twRequest.account = [twitterAccounts firstObject];
+            [self.twRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                if (responseData)
+                {
+                    NSError *jsonSerializationError = nil;
+                    self.tweetsDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonSerializationError];
+                    if (!jsonSerializationError)
+                    {
+//                        NSLog(@"Tweets Near Me Dictionary: %@",self.tweetsDictionary);
+                        self.tweets = self.tweetsDictionary[@"statuses"];
+                        NSLog(@"Tweets Near Me Array: %@",self.tweets);
+                        [self.tweetsTableView reloadData];
+                    }
+                }
+            }];
+
         }
+        else
+        {
+            NSLog(@"Access to Twitter accounts not granted");
+        }
+
     }];
+
 }
 
 @end
