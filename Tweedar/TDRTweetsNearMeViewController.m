@@ -13,6 +13,7 @@
 #import "TDRTweetDetailViewController.h"
 #import "TDRTweetPointAnnotation.h"
 
+#define kDebugOn NO
 #define kDefaultCoordinateSpanLat 0.07
 #define kDefaultCoordinateSpanLon 0.07
 #define kDefaultCoordinateLat 40.1323882
@@ -57,7 +58,7 @@
 {
     self.curLocation = [[CLLocation alloc] initWithLatitude:kDefaultCoordinateLat longitude:kDefaultCoordinateLon];
     [self setTweetMapViewToCoordinate:self.curLocation.coordinate];
-    NSLog(@"Failed to locate user - using default location: %@",error);
+    if (kDebugOn) NSLog(@"Failed to locate user - using default location: %@",error);
 }
 
 
@@ -73,7 +74,7 @@
     {
         MKPinAnnotationView *newTweetPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kTweetPinAnnotationReuseID];
         TDRTweetPointAnnotation *tweetAnnotation = (TDRTweetPointAnnotation *) annotation;
-        NSLog(@"annotation title: %@", [annotation title]);
+        if (kDebugOn) NSLog(@"annotation title: %@", [annotation title]);
         newTweetPin.tag = tweetAnnotation.tweetIndex;
         newTweetPin.canShowCallout = YES;
         newTweetPin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
@@ -121,7 +122,7 @@
     CLLocationCoordinate2D testCoordinate =  CLLocationCoordinate2DMake(kDefaultCoordinateLat,kDefaultCoordinateLon);
     [self.tweetsController startUpdatingTweetsForNewCoordinate:testCoordinate];
     [self.refreshActivityView startAnimating];
-    NSLog(@"in delegate method didObtainTwitterAccountInTwitterController");
+    if (kDebugOn) NSLog(@"in delegate method didObtainTwitterAccountInTwitterController");
 
 }
 
@@ -134,7 +135,7 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    NSLog(@"in delegate method didFailToObtainTwitterAccountInTwitterController");
+    if (kDebugOn) NSLog(@"in delegate method didFailToObtainTwitterAccountInTwitterController");
 }
 
 
@@ -143,7 +144,7 @@
     [self.refreshActivityView stopAnimating];
     for (int index = 0; index < tweetController.currentNumberOfTweets; index++)
     {
-        NSLog(@"%@",[self.tweetsController tweetAtIndex:index]);
+        if (kDebugOn) NSLog(@"%@",[self.tweetsController tweetAtIndex:index]);
         [self annotateMapWithTweet:[self.tweetsController tweetAtIndex:index] withIndex:index];
     }
     [NSTimer scheduledTimerWithTimeInterval:kDefaultTweetRefreshInterval target:self selector:@selector(refreshTweetMap) userInfo:nil repeats:NO];

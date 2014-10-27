@@ -10,11 +10,13 @@
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
 
+#define kDebugOn NO
 #define kTwitterAPISearchTweetURLString @"https://api.twitter.com/1.1/search/tweets.json"
 #define kDefaultCoordinateParameter @"40.1323882,-75.1379737,1mi"
 #define kIndexLat 0
 #define kIndexLon 1
 #define kZeroCoordinateArray @[@(0),@(0)]
+#define kMaxTweets @"100"
 
 @interface TDRTweetsController ()
 
@@ -81,7 +83,7 @@
             {
                 NSError *tweetSearchError = nil;
                 NSDictionary *tweetsDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&tweetSearchError];
-                NSLog(@"Tweets Pulled: %@",tweetsDictionary);
+                if (kDebugOn) NSLog(@"Tweets Pulled: %@",tweetsDictionary);
 
                 NSArray *unsortedTweets = tweetsDictionary[@"statuses"];
                 self.currentTweets = [self boxAndSortTweetsByDate:unsortedTweets];
@@ -101,7 +103,7 @@
 - (NSDictionary *)buildTweetSearchParametersWithCoordinate:(CLLocationCoordinate2D)coordinate
 {
     NSString *geocodeString = [NSString stringWithFormat:@"%lf,%lf,1mi",coordinate.latitude,coordinate.longitude];
-    NSDictionary *tweetSearchDictionary = @{@"geocode":geocodeString};
+    NSDictionary *tweetSearchDictionary = @{@"geocode":geocodeString,@"count":kMaxTweets};
     return tweetSearchDictionary;
 }
 
