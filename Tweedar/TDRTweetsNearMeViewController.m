@@ -18,25 +18,28 @@
 #define kDefaultCoordinateSpanLon 0.07
 #define kDefaultCoordinateLat 40.1323882
 #define kDefaultCoordinateLon -75.1379737
+#define kLocationAccuracyTolerance 2000
+
 #define kTweetPinAnnotationReuseID @"TweetPin"
 #define kDefaultTweetRefreshInterval 15.0
+
 
 @interface TDRTweetsNearMeViewController () <MKMapViewDelegate,TweetControllerDelegate,CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *tweetsMapView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *refreshActivityView;
 
+@property (strong, nonatomic) TDRTweetsController *tweetsController;
+
 @property (assign, nonatomic) MKCoordinateRegion curRegion;
 @property (assign, nonatomic) MKCoordinateSpan curSpan;
 @property (strong, nonatomic) CLLocation *curLocation;
-@property (strong, nonatomic) TDRTweetsController *tweetsController;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
 
 @implementation TDRTweetsNearMeViewController
-
 
 #pragma mark - UIViewController Lifecycle Methods
 
@@ -48,21 +51,21 @@
 
 #pragma mark - MKMapViewDelegate Methods
 
--(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    self.curLocation = userLocation.location;
-    [self setTweetMapViewToCoordinate:self.curLocation.coordinate];
-}
+//- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+//{
+//    self.curLocation = userLocation.location;
+//    [self setTweetMapViewToCoordinate:self.curLocation.coordinate];
+//}
+//
+//- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
+//{
+//    self.curLocation = [[CLLocation alloc] initWithLatitude:kDefaultCoordinateLat longitude:kDefaultCoordinateLon];
+//    [self setTweetMapViewToCoordinate:self.curLocation.coordinate];
+//    if (kDebugOn) NSLog(@"Failed to locate user - using default location: %@",error);
+//}
 
-- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
-{
-    self.curLocation = [[CLLocation alloc] initWithLatitude:kDefaultCoordinateLat longitude:kDefaultCoordinateLon];
-    [self setTweetMapViewToCoordinate:self.curLocation.coordinate];
-    if (kDebugOn) NSLog(@"Failed to locate user - using default location: %@",error);
-}
 
-
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
     MKAnnotationView *tweetPin;
 
@@ -85,17 +88,20 @@
 }
 
 
--(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     [self performSegueWithIdentifier:@"TweetDetailSegue" sender:view];
 }
 
 
+#pragma mark - CLLocationManagerDelegate Methods
+
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     for (CLLocation *curLocation in locations)
     {
-        if (curLocation.verticalAccuracy < 1000 && curLocation.horizontalAccuracy < 1000)
+        if (curLocation.verticalAccuracy < kLocationAccuracyTolerance &&
+            curLocation.horizontalAccuracy < kLocationAccuracyTolerance)
         {
             [self.locationManager stopUpdatingLocation];
             self.curLocation = curLocation;
@@ -104,15 +110,15 @@
     }
 }
 
+
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to Detect Current Location"
-                                                    message:@"..."
+                                                    message:@"Please enable location services for Tweedar in the Settings App"
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-
 }
 
 #pragma mark - TweetControllerDelegate Methods
@@ -147,6 +153,7 @@
         if (kDebugOn) NSLog(@"%@",[self.tweetsController tweetAtIndex:index]);
         [self annotateMapWithTweet:[self.tweetsController tweetAtIndex:index] withIndex:index];
     }
+
     [NSTimer scheduledTimerWithTimeInterval:kDefaultTweetRefreshInterval target:self selector:@selector(refreshTweetMap) userInfo:nil repeats:NO];
 }
 
@@ -169,6 +176,8 @@
 - (void)setupTweetsVC
 {
     [self.refreshActivityView stopAnimating];
+    self.refreshActivityView.tintColor = [UIColor blueColor];
+
     self.tweetsMapView.delegate = self;
     self.tweetsMapView.showsUserLocation = YES;
 

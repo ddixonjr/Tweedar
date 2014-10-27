@@ -122,6 +122,7 @@
                                                   timestamp:curTweet[@"created_at"]
                                                    latitude:curTweetCoordinate[kIndexLat]
                                                   longitude:curTweetCoordinate[kIndexLon]];
+        newTweet.avatarURLString = (![curTweetUser[@"profile_image_url"] isEqual:[NSNull null]]) ? curTweetUser[@"profile_image_url"] : nil;
         [boxedAndSortedTweets addObject:newTweet];
     }
 

@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString *userHandle;
 @property (strong, nonatomic) NSString *tweetText;
 @property (strong, nonatomic) NSString *dateString;
+@property (strong, nonatomic) NSString *avatarURLString;
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 
 - (instancetype)initWithUserHandle:(NSString *)userHandle
