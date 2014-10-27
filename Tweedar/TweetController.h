@@ -12,9 +12,14 @@
 
 @class TweetController;
 
-@protocol TweetControllerDelegate
+@protocol TweetControllerDelegate <NSObject>
 
+@required
 - (void)tweetsDidChangeInTweetController:(TweetController *)tweetController;
+
+@optional
+- (void)didObtainTwitterAccountInTwitterController:(TweetController *)tweetController;
+- (void)didFailToObtainTwitterAccountInTwitterController:(TweetController *)tweetController;
 
 @end
 
@@ -25,6 +30,6 @@
 @property (assign, nonatomic) NSInteger currentNumberOfTweets;
 
 - (Tweet *)tweetAtIndex:(NSInteger)index;
-- (void)updateTweetsForNewLocation:(CLLocationCoordinate2D)coordinate;
+- (void)startUpdatingTweetsForNewCoordinate:(CLLocationCoordinate2D)coordinate;
 
 @end

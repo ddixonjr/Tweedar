@@ -10,4 +10,18 @@
 
 @implementation Tweet
 
+- (instancetype)initWithUserHandle:(NSString *)userHandle
+                         tweetText:(NSString *)tweetText
+                         timestamp:(NSString *)dateString
+{
+    self = [super init];
+    if (self)
+    {
+        _userHandle = userHandle;
+        _tweetText = tweetText;
+        _dateString = dateString;
+    }
+    return self;
+}
+
 @end

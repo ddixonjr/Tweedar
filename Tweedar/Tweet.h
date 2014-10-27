@@ -10,4 +10,13 @@
 
 @interface Tweet : NSObject
 
+@property (strong, nonatomic) NSString *userHandle;
+@property (strong, nonatomic) NSString *tweetText;
+@property (strong, nonatomic) NSString *dateString;
+
+- (instancetype)initWithUserHandle:(NSString *)userHandle
+                         tweetText:(NSString *)tweetText
+                         timestamp:(NSString *)dateString;
+
+
 @end
