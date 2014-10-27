@@ -18,11 +18,13 @@
 #define kDefaultCoordinateLat 40.1323882
 #define kDefaultCoordinateLon -75.1379737
 #define kTweetPinAnnotationReuseID @"TweetPin"
-
+#define kDefaultTweetRefreshInterval 15.0
 
 @interface TDRTweetsNearMeViewController () <MKMapViewDelegate,TweetControllerDelegate,CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *tweetsMapView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *refreshActivityView;
+
 @property (assign, nonatomic) MKCoordinateRegion curRegion;
 @property (assign, nonatomic) MKCoordinateSpan curSpan;
 @property (strong, nonatomic) CLLocation *curLocation;
@@ -97,7 +99,6 @@
             [self.locationManager stopUpdatingLocation];
             self.curLocation = curLocation;
             [self setTweetMapViewToCoordinate:self.curLocation.coordinate];
-
         }
     }
 }
@@ -119,7 +120,9 @@
 {
     CLLocationCoordinate2D testCoordinate =  CLLocationCoordinate2DMake(kDefaultCoordinateLat,kDefaultCoordinateLon);
     [self.tweetsController startUpdatingTweetsForNewCoordinate:testCoordinate];
+    [self.refreshActivityView startAnimating];
     NSLog(@"in delegate method didObtainTwitterAccountInTwitterController");
+
 }
 
 
@@ -137,12 +140,13 @@
 
 - (void)tweetsDidChangeInTweetsController:(TDRTweetsController *)tweetController
 {
+    [self.refreshActivityView stopAnimating];
     for (int index = 0; index < tweetController.currentNumberOfTweets; index++)
     {
         NSLog(@"%@",[self.tweetsController tweetAtIndex:index]);
         [self annotateMapWithTweet:[self.tweetsController tweetAtIndex:index] withIndex:index];
     }
-
+    [NSTimer scheduledTimerWithTimeInterval:kDefaultTweetRefreshInterval target:self selector:@selector(refreshTweetMap) userInfo:nil repeats:NO];
 }
 
 
@@ -163,6 +167,7 @@
 
 - (void)setupTweetsVC
 {
+    [self.refreshActivityView stopAnimating];
     self.tweetsMapView.delegate = self;
     self.tweetsMapView.showsUserLocation = YES;
 
@@ -193,5 +198,13 @@
     [self.tweetsMapView setRegion:self.curRegion animated:YES];
 
 }
+
+
+- (void)refreshTweetMap
+{
+    [self.refreshActivityView startAnimating];
+    [self.tweetsController startUpdatingTweetsForNewCoordinate:self.curLocation.coordinate];
+}
+
 
 @end
