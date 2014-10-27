@@ -8,11 +8,14 @@
 
 #import "Tweet.h"
 
+
 @implementation Tweet
 
 - (instancetype)initWithUserHandle:(NSString *)userHandle
                          tweetText:(NSString *)tweetText
                          timestamp:(NSString *)dateString
+                          latitude:(double)latitude
+                         longitude:(double)longitude
 {
     self = [super init];
     if (self)
@@ -22,6 +25,14 @@
         _dateString = dateString;
     }
     return self;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"Tweet - text = %@,text = %@,dateString = %@",
+            self.userHandle,
+            self.tweetText,
+            self.dateString];
 }
 
 @end

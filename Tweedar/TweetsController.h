@@ -10,21 +10,21 @@
 #import "Tweet.h"
 #import <CoreLocation/CoreLocation.h>
 
-@class TweetController;
+@class TweetsController;
 
 @protocol TweetControllerDelegate <NSObject>
 
 @required
-- (void)tweetsDidChangeInTweetController:(TweetController *)tweetController;
+- (void)tweetsDidChangeInTweetsController:(TweetsController *)tweetsController;
 
 @optional
-- (void)didObtainTwitterAccountInTwitterController:(TweetController *)tweetController;
-- (void)didFailToObtainTwitterAccountInTwitterController:(TweetController *)tweetController;
+- (void)didObtainTwitterAccountInTweetsController:(TweetsController *)tweetsController;
+- (void)didFailToObtainTwitterAccountInTweetsController:(TweetsController *)tweetsController;
 
 @end
 
 
-@interface TweetController : NSObject
+@interface TweetsController : NSObject
 
 @property (weak, nonatomic) id<TweetControllerDelegate> delegate;
 @property (assign, nonatomic) NSInteger currentNumberOfTweets;

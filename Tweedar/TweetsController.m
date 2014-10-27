@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Appivot LLC. All rights reserved.
 //
 
-#import "TweetController.h"
+#import "TweetsController.h"
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
 
@@ -14,7 +14,7 @@
 #define kDefaultCoordinateParameter @"40.1323882,-75.1379737,1mi"
 
 
-@interface TweetController ()
+@interface TweetsController ()
 
 @property (strong, nonatomic) NSMutableArray *currentTweets;
 @property (strong, nonatomic) ACAccount *currentTwitterUserAccount;
@@ -24,7 +24,7 @@
 @end
 
 
-@implementation TweetController
+@implementation TweetsController
 
 - (instancetype)init
 {
@@ -38,16 +38,16 @@
             {
                 NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
                 _currentTwitterUserAccount = [twitterAccounts firstObject];
-                if ([self.delegate respondsToSelector:@selector(didObtainTwitterAccountInTwitterController:)])
+                if ([self.delegate respondsToSelector:@selector(didObtainTwitterAccountInTweetsController:)])
                 {
-                    [self.delegate didObtainTwitterAccountInTwitterController:self];
+                    [self.delegate didObtainTwitterAccountInTweetsController:self];
                 }
             }
             else
             {
-                if ([self.delegate respondsToSelector:@selector(didFailToObtainTwitterAccountInTwitterController:)])
+                if ([self.delegate respondsToSelector:@selector(didFailToObtainTwitterAccountInTweetsController:)])
                 {
-                    [self.delegate didFailToObtainTwitterAccountInTwitterController:self];
+                    [self.delegate didFailToObtainTwitterAccountInTweetsController:self];
                 }
             }
         }];
@@ -78,9 +78,11 @@
             {
                 NSError *tweetSearchError = nil;
                 NSDictionary *tweetsDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&tweetSearchError];
-                NSArray *unsortedTweets = tweetsDictionary[@"statuses"];
 
-                [self.delegate tweetsDidChangeInTweetController:self];
+                NSArray *unsortedTweets = tweetsDictionary[@"statuses"];
+                self.currentTweets = [self boxAndSortTweetsByDate:unsortedTweets];
+                self.currentNumberOfTweets = self.currentTweets.count;
+                [self.delegate tweetsDidChangeInTweetsController:self];
             }
             ;
         }];
@@ -103,10 +105,11 @@
 
     for (NSDictionary *curTweet in unsortedTweets)
     {
-        Tweet *newTweetBox = [[Tweet alloc] initWithUserHandle:curTweet[@""]
-                                                     tweetText:curTweet[@""]
-                                                     timestamp:curTweet[@""]];
-
+        NSDictionary *curTweetUser = curTweet[@"user"];
+        Tweet *newTweet = [[Tweet alloc] initWithUserHandle:curTweetUser[@"name"]
+                                                  tweetText:curTweet[@"text"]
+                                                  timestamp:curTweet[@"created_at"]];
+        [boxedAndSortedTweets addObject:newTweetBox];
     }
 
     return boxedAndSortedTweets;
