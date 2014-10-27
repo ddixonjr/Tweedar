@@ -11,6 +11,7 @@
 #import "TDRTweetsController.h"
 #import "TDRTweet.h"
 #import "TDRTweetDetailViewController.h"
+#import "TDRTweetPointAnnotation.h"
 
 #define kDefaultCoordinateSpanLat 0.07
 #define kDefaultCoordinateSpanLon 0.07
@@ -60,10 +61,23 @@
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-    MKPinAnnotationView *tweetPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kTweetPinAnnotationReuseID];
-    tweetPin.canShowCallout = YES;
-    tweetPin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-//    tweetPin.tag = ;
+    MKAnnotationView *tweetPin;
+
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+    {
+        tweetPin = nil;
+    }
+    else if ([annotation isKindOfClass:[TDRTweetPointAnnotation class]])
+    {
+        MKPinAnnotationView *newTweetPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kTweetPinAnnotationReuseID];
+        TDRTweetPointAnnotation *tweetAnnotation = (TDRTweetPointAnnotation *) annotation;
+        NSLog(@"annotation title: %@", [annotation title]);
+        newTweetPin.tag = tweetAnnotation.tweetIndex;
+        newTweetPin.canShowCallout = YES;
+        newTweetPin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        tweetPin = newTweetPin;
+    }
+
     return tweetPin;
 }
 
@@ -126,7 +140,7 @@
     for (int index = 0; index < tweetController.currentNumberOfTweets; index++)
     {
         NSLog(@"%@",[self.tweetsController tweetAtIndex:index]);
-        [self annotateMapWithTweet:[self.tweetsController tweetAtIndex:index]];
+        [self annotateMapWithTweet:[self.tweetsController tweetAtIndex:index] withIndex:index];
     }
 
 }
@@ -161,12 +175,13 @@
 }
 
 
-- (void)annotateMapWithTweet:(TDRTweet *)tweet
+- (void)annotateMapWithTweet:(TDRTweet *)tweet withIndex:(NSInteger)index
 {
-    MKPointAnnotation *tweetAnnotation = [[MKPointAnnotation alloc] init];
+    TDRTweetPointAnnotation *tweetAnnotation = [[TDRTweetPointAnnotation alloc] init];
     tweetAnnotation.title = tweet.userHandle;
     tweetAnnotation.coordinate = tweet.coordinate;
     tweetAnnotation.subtitle = tweet.tweetText;
+    tweetAnnotation.tweetIndex = index;
     [self.tweetsMapView addAnnotation:tweetAnnotation];
 }
 

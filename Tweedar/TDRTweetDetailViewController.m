@@ -23,7 +23,7 @@
 
     self.title = [NSString stringWithFormat:@"Tweet by %@",self.tweet.userHandle];
     self.tweetDateString.text = self.tweet.dateString;
-    self.tweetCoordinateLabel.text = [NSString stringWithFormat:@"Latitude: %lf  - Longitude: %lf",self.tweet.coordinate.latitude,self.tweet.coordinate.longitude];
+    self.tweetCoordinateLabel.text = [NSString stringWithFormat:@"Lat: %0.4lf, Lon: %0.4lf",self.tweet.coordinate.latitude,self.tweet.coordinate.longitude];
     self.tweetTextView.text = self.tweet.tweetText;
 }
 

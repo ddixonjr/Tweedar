@@ -21,6 +21,7 @@
 		953FD56D19FE861600837367 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953FD56C19FE861600837367 /* Accounts.framework */; };
 		953FD56F19FE990900837367 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953FD56E19FE990900837367 /* Twitter.framework */; };
 		953FD57219FED4F400837367 /* TDRTweetDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 953FD57119FED4F400837367 /* TDRTweetDetailViewController.m */; };
+		953FD57519FEEBA800837367 /* TDRTweetPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 953FD57419FEEBA800837367 /* TDRTweetPointAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		953FD56E19FE990900837367 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		953FD57019FED4F400837367 /* TDRTweetDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRTweetDetailViewController.h; sourceTree = "<group>"; };
 		953FD57119FED4F400837367 /* TDRTweetDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRTweetDetailViewController.m; sourceTree = "<group>"; };
+		953FD57319FEEBA800837367 /* TDRTweetPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRTweetPointAnnotation.h; sourceTree = "<group>"; };
+		953FD57419FEEBA800837367 /* TDRTweetPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRTweetPointAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				953FD56619FE806B00837367 /* TDRTweet.m */,
 				953FD57019FED4F400837367 /* TDRTweetDetailViewController.h */,
 				953FD57119FED4F400837367 /* TDRTweetDetailViewController.m */,
+				953FD57319FEEBA800837367 /* TDRTweetPointAnnotation.h */,
+				953FD57419FEEBA800837367 /* TDRTweetPointAnnotation.m */,
 			);
 			path = Tweedar;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				953FD53C19FAB63700837367 /* AppDelegate.m in Sources */,
 				953FD56419FE7F8800837367 /* TDRTweetsController.m in Sources */,
 				953FD56719FE806B00837367 /* TDRTweet.m in Sources */,
+				953FD57519FEEBA800837367 /* TDRTweetPointAnnotation.m in Sources */,
 				953FD53919FAB63700837367 /* main.m in Sources */,
 				953FD55E19FAB80300837367 /* TDRTweetsNearMeViewController.m in Sources */,
 				953FD57219FED4F400837367 /* TDRTweetDetailViewController.m in Sources */,
