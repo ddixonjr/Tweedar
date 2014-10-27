@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 Appivot LLC. All rights reserved.
 //
 
-#import "Tweet.h"
+#import "TDRTweet.h"
 
 
-@implementation Tweet
+@implementation TDRTweet
 
 - (instancetype)initWithUserHandle:(NSString *)userHandle
                          tweetText:(NSString *)tweetText
                          timestamp:(NSString *)dateString
-                          latitude:(double)latitude
-                         longitude:(double)longitude
+                          latitude:(NSNumber *)latitude
+                         longitude:(NSNumber *)longitude
 {
     self = [super init];
     if (self)
@@ -23,16 +23,22 @@
         _userHandle = userHandle;
         _tweetText = tweetText;
         _dateString = dateString;
+        _coordinate = CLLocationCoordinate2DMake([longitude doubleValue], [latitude doubleValue]);
     }
     return self;
 }
 
+
+#pragma mark - Overidden Superclass Methods
+
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Tweet - text = %@,text = %@,dateString = %@",
+    return [NSString stringWithFormat:@"Tweet - text = %@,text = %@,dateString = %@ lat = %lf  lon = %lf",
             self.userHandle,
             self.tweetText,
-            self.dateString];
+            self.dateString,
+            self.coordinate.latitude,
+            self.coordinate.longitude];
 }
 
 @end

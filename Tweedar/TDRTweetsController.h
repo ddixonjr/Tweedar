@@ -7,29 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Tweet.h"
+#import "TDRTweet.h"
 #import <CoreLocation/CoreLocation.h>
 
-@class TweetsController;
+@class TDRTweetsController;
 
 @protocol TweetControllerDelegate <NSObject>
 
 @required
-- (void)tweetsDidChangeInTweetsController:(TweetsController *)tweetsController;
+- (void)tweetsDidChangeInTweetsController:(TDRTweetsController *)tweetsController;
 
 @optional
-- (void)didObtainTwitterAccountInTweetsController:(TweetsController *)tweetsController;
-- (void)didFailToObtainTwitterAccountInTweetsController:(TweetsController *)tweetsController;
+- (void)didObtainTwitterAccountInTweetsController:(TDRTweetsController *)tweetsController;
+- (void)didFailToObtainTwitterAccountInTweetsController:(TDRTweetsController *)tweetsController;
 
 @end
 
 
-@interface TweetsController : NSObject
+@interface TDRTweetsController : NSObject
 
 @property (weak, nonatomic) id<TweetControllerDelegate> delegate;
 @property (assign, nonatomic) NSInteger currentNumberOfTweets;
 
-- (Tweet *)tweetAtIndex:(NSInteger)index;
+- (TDRTweet *)tweetAtIndex:(NSInteger)index;
 - (void)startUpdatingTweetsForNewCoordinate:(CLLocationCoordinate2D)coordinate;
 
 @end

@@ -6,15 +6,17 @@
 //  Copyright (c) 2014 Appivot LLC. All rights reserved.
 //
 
-#import "TweetsController.h"
+#import "TDRTweetsController.h"
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
 
 #define kTwitterAPISearchTweetURLString @"https://api.twitter.com/1.1/search/tweets.json"
 #define kDefaultCoordinateParameter @"40.1323882,-75.1379737,1mi"
+#define kIndexLat 0
+#define kIndexLon 1
+#define kZeroCoordinateArray @[@(0),@(0)]
 
-
-@interface TweetsController ()
+@interface TDRTweetsController ()
 
 @property (strong, nonatomic) NSMutableArray *currentTweets;
 @property (strong, nonatomic) ACAccount *currentTwitterUserAccount;
@@ -24,7 +26,7 @@
 @end
 
 
-@implementation TweetsController
+@implementation TDRTweetsController
 
 - (instancetype)init
 {
@@ -59,7 +61,7 @@
 
 #pragma mark - TweetController API Methods
 
-- (Tweet *)tweetAtIndex:(NSInteger)index;
+- (TDRTweet *)tweetAtIndex:(NSInteger)index;
 {
     return self.currentTweets[index];
 }
@@ -72,17 +74,21 @@
         NSDictionary *tweetSearchParameters  = [self buildTweetSearchParametersWithCoordinate:coordinate];
         NSURL *tweetSearchURL = [NSURL URLWithString:kTwitterAPISearchTweetURLString];
         self.twitterRequest = [[TWRequest alloc] initWithURL:tweetSearchURL parameters:tweetSearchParameters requestMethod:TWRequestMethodGET];
+        self.twitterRequest.account = self.currentTwitterUserAccount;
         [self.twitterRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
         {
             if (!error && responseData)
             {
                 NSError *tweetSearchError = nil;
                 NSDictionary *tweetsDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&tweetSearchError];
+                NSLog(@"Tweets Pulled: %@",tweetsDictionary);
 
                 NSArray *unsortedTweets = tweetsDictionary[@"statuses"];
                 self.currentTweets = [self boxAndSortTweetsByDate:unsortedTweets];
                 self.currentNumberOfTweets = self.currentTweets.count;
-                [self.delegate tweetsDidChangeInTweetsController:self];
+                dispatch_async(dispatch_get_main_queue(),^{
+                    [self.delegate tweetsDidChangeInTweetsController:self];
+                });
             }
             ;
         }];
@@ -106,10 +112,15 @@
     for (NSDictionary *curTweet in unsortedTweets)
     {
         NSDictionary *curTweetUser = curTweet[@"user"];
-        Tweet *newTweet = [[Tweet alloc] initWithUserHandle:curTweetUser[@"name"]
+        NSDictionary *curTweetCoordinateDictionary = curTweet[@"coordinates"];
+        NSArray *curTweetCoordinate = (![curTweetCoordinateDictionary isEqual:[NSNull null]]) ?
+                                        curTweetCoordinateDictionary[@"coordinates"] : kZeroCoordinateArray;
+        TDRTweet *newTweet = [[TDRTweet alloc] initWithUserHandle:curTweetUser[@"name"]
                                                   tweetText:curTweet[@"text"]
-                                                  timestamp:curTweet[@"created_at"]];
-        [boxedAndSortedTweets addObject:newTweetBox];
+                                                  timestamp:curTweet[@"created_at"]
+                                                   latitude:curTweetCoordinate[kIndexLat]
+                                                  longitude:curTweetCoordinate[kIndexLon]];
+        [boxedAndSortedTweets addObject:newTweet];
     }
 
     return boxedAndSortedTweets;
