@@ -15,6 +15,9 @@
 		953FD55319FAB63700837367 /* TweedarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 953FD55219FAB63700837367 /* TweedarTests.m */; };
 		953FD55E19FAB80300837367 /* TDRTweetsNearMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 953FD55D19FAB80300837367 /* TDRTweetsNearMeViewController.m */; };
 		953FD56019FAE90400837367 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953FD55F19FAE90400837367 /* MapKit.framework */; };
+		953FD56419FE7F8800837367 /* TweetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 953FD56319FE7F8800837367 /* TweetController.m */; };
+		953FD56719FE806B00837367 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 953FD56619FE806B00837367 /* Tweet.m */; };
+		953FD56B19FE823A00837367 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953FD56A19FE823A00837367 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,11 @@
 		953FD55C19FAB80300837367 /* TDRTweetsNearMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRTweetsNearMeViewController.h; sourceTree = "<group>"; };
 		953FD55D19FAB80300837367 /* TDRTweetsNearMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRTweetsNearMeViewController.m; sourceTree = "<group>"; };
 		953FD55F19FAE90400837367 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		953FD56219FE7F8800837367 /* TweetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetController.h; sourceTree = "<group>"; };
+		953FD56319FE7F8800837367 /* TweetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetController.m; sourceTree = "<group>"; };
+		953FD56519FE806B00837367 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		953FD56619FE806B00837367 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
+		953FD56A19FE823A00837367 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953FD56B19FE823A00837367 /* CoreLocation.framework in Frameworks */,
 				953FD56019FAE90400837367 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +102,10 @@
 				953FD54319FAB63700837367 /* Images.xcassets */,
 				953FD54519FAB63700837367 /* LaunchScreen.xib */,
 				953FD53619FAB63700837367 /* Supporting Files */,
+				953FD56219FE7F8800837367 /* TweetController.h */,
+				953FD56319FE7F8800837367 /* TweetController.m */,
+				953FD56519FE806B00837367 /* Tweet.h */,
+				953FD56619FE806B00837367 /* Tweet.m */,
 			);
 			path = Tweedar;
 			sourceTree = "<group>";
@@ -126,6 +139,7 @@
 		953FD56119FAE91700837367 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				953FD56A19FE823A00837367 /* CoreLocation.framework */,
 				953FD55F19FAE90400837367 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -232,6 +246,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				953FD53C19FAB63700837367 /* AppDelegate.m in Sources */,
+				953FD56419FE7F8800837367 /* TweetController.m in Sources */,
+				953FD56719FE806B00837367 /* Tweet.m in Sources */,
 				953FD53919FAB63700837367 /* main.m in Sources */,
 				953FD55E19FAB80300837367 /* TDRTweetsNearMeViewController.m in Sources */,
 			);
