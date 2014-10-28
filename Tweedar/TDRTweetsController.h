@@ -28,9 +28,11 @@
 
 @property (weak, nonatomic) id<TweetControllerDelegate> delegate;
 @property (assign, nonatomic) NSInteger currentNumberOfTweets;
+@property (strong, nonatomic) NSMutableArray *favorites;
 
 - (TDRTweet *)tweetAtIndex:(NSInteger)index;
 - (void)startUpdatingTweetsForNewCoordinate:(CLLocationCoordinate2D)coordinate;
 - (void)toggleFavoriteForTweet:(TDRTweet *)tweet inBackgroundWithBlock:(void(^)(BOOL success, NSError *error))completion;
+- (BOOL)isFavoritedTweet:(TDRTweet *)tweet;
 
 @end

@@ -10,7 +10,7 @@
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
 
-#define kDebugOn YES
+#define kDebugOn NO
 #define kTwitterAPISearchTweetURLString @"https://api.twitter.com/1.1/search/tweets.json"
 #define kTwitterAPIRetweetURLString @"https://api.twitter.com/1.1/statuses/retweet/:id.json"
 #define kTwitterAPIFavoriteURLString @"https://api.twitter.com/1.1/favorites/create.json"
@@ -53,6 +53,7 @@
                 if ([self.delegate respondsToSelector:@selector(didObtainTwitterAccountInTweetsController:)])
                 {
                     [self.delegate didObtainTwitterAccountInTweetsController:self];
+                    self.favorites = [NSMutableArray array];
                 }
             }
             else
@@ -109,14 +110,12 @@
 - (void)toggleFavoriteForTweet:(TDRTweet *)tweet inBackgroundWithBlock:(void(^)(BOOL success, NSError *error))completion
 
 {
-    __block TDRTweet *tweetRefForBlock = tweet;
-
     dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async(backgroundQueue, ^{
-        NSString *tweetFavoriteURLString = (tweetRefForBlock.favorited) ?
+        NSString *tweetFavoriteURLString = ([self indexOfFavoritedTweet:tweet] != NSNotFound) ?
             kTwitterAPIUnfavoriteURLString : kTwitterAPIFavoriteURLString;
         NSURL *tweetFavoriteURL = [NSURL URLWithString:tweetFavoriteURLString];
-        NSDictionary *tweetFavoriteParameters = @{@"id":tweetRefForBlock.tweetID};
+        NSDictionary *tweetFavoriteParameters = @{@"id":tweet.tweetID};
 
         TWRequest *twitterFavoriteRequest = [[TWRequest alloc]initWithURL:tweetFavoriteURL
                                                           parameters:tweetFavoriteParameters
@@ -127,7 +126,7 @@
             dispatch_async(dispatch_get_main_queue(),^{
                 if (urlResponse.statusCode == kHTTPStatusCodeOK)
                 {
-                    [self toggleFavoriteStatusForTweetObject:tweetRefForBlock];
+                    [self toggleFavoriteStatusForTweetObject:tweet];
                     completion(YES,nil);
                 }
                 else
@@ -137,6 +136,19 @@
             });
         }];
     });
+}
+
+
+- (BOOL)isFavoritedTweet:(TDRTweet *)tweet
+{
+    BOOL isFavoritedTweet = NO;
+
+    if ([self indexOfFavoritedTweet:tweet] != NSNotFound)
+    {
+        isFavoritedTweet = YES;
+    }
+
+    return isFavoritedTweet;
 }
 
 
@@ -152,8 +164,43 @@
 
 - (void)toggleFavoriteStatusForTweetObject:(TDRTweet *)tweet
 {
-    tweet.favorited = !tweet.favorited;
+    NSLog(@"favorites list before toggle: %@",self.favorites);
+
+    NSInteger indexOfFavoriteTweet = [self indexOfFavoritedTweet:tweet];
+    if (indexOfFavoriteTweet != NSNotFound)
+    {
+        NSLog(@"tweet id %@ favorited in favorites list %@",tweet.tweetID, self.favorites);
+        [self.favorites removeObjectAtIndex:indexOfFavoriteTweet];
+    }
+    else
+    {
+        NSLog(@"tweet id %@ unfavorited in favorites list %@",tweet.tweetID, self.favorites);
+        [self.favorites addObject:tweet.tweetID];
+    }
+    NSLog(@"favorites list after toggle: %@", self.favorites);
+
 }
+
+
+- (NSInteger)indexOfFavoritedTweet:(TDRTweet *)tweet
+{
+    NSInteger indexOfFavoriteTweetID = NSNotFound;
+
+    for (int index = 0; index < self.favorites.count; index++)
+    {
+        NSString *curFavoriteID = self.favorites[index];
+
+        if ([tweet.tweetID isEqualToString:curFavoriteID])
+        {
+            indexOfFavoriteTweetID = index;
+            break;
+        }
+    }
+
+    NSLog(@"index of favorited tweet ID in favorites array = %ld",indexOfFavoriteTweetID);
+    return indexOfFavoriteTweetID;
+}
+
 
 - (NSMutableArray *)boxAndSortTweetsByDate:(NSArray *)unsortedTweets
 {

@@ -106,7 +106,7 @@
 
 - (void)setFavoriteButtonStatus
 {
-    if (self.tweet.favorited)
+    if ([self.tweetsController isFavoritedTweet:self.tweet])
     {
         [self.favoriteButton setTitle:kUnfavoriteTitleText forState:UIControlStateNormal];
     }
