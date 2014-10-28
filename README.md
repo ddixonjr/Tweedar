@@ -1,42 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1265.21">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 23.1px 0.0px; font: 28.0px 'Lucida Grande'}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Lucida Grande'}
-    p.p3 {margin: 0.0px 0.0px 19.4px 0.0px; font: 23.0px 'Lucida Grande'; color: #3c4c6c; min-height: 27.0px}
-    p.p4 {margin: 0.0px 0.0px 19.4px 0.0px; font: 23.0px 'Lucida Grande'; color: #3c4c6c}
-    p.p5 {margin: 0.0px 0.0px 13.0px 0.0px; font: 13.0px 'Lucida Grande'}
-    p.p7 {margin: 0.0px 0.0px 28.2px 0.0px; font: 19.0px 'Lucida Grande'}
-    p.p8 {margin: 0.0px 0.0px 10.4px 0.0px; font: 13.0px 'Lucida Grande'}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier}
-    p.p10 {margin: 0.0px 0.0px 2.6px 0.0px; font: 13.0px 'Lucida Grande'}
-    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #666666}
-    p.p12 {margin: 0.0px 0.0px 28.2px 0.0px; font: 19.0px 'Lucida Grande'; min-height: 22.0px}
-    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Lucida Grande'}
-    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #666666; min-height: 16.0px}
-    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Lucida Grande'; min-height: 16.0px}
-    p.p16 {margin: 0.0px 0.0px 13.0px 0.0px; font: 13.0px 'Lucida Grande'; min-height: 16.0px}
-    p.p17 {margin: 0.0px 0.0px 13.0px 0.0px; font: 13.0px Courier; color: #666666; min-height: 16.0px}
-    li.li6 {margin: 0.0px 0.0px 3.0px 0.0px; font: 13.0px Courier; color: #3366cc}
-    span.s1 {color: #3366cc}
-    span.s2 {font: 13.0px 'Lucida Grande'; color: #000000}
-    span.s3 {font: 12.0px 'Lucida Grande'; color: #999966}
-    table.t1 {border-collapse: collapse}
-    td.td1 {width: 82.0px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: transparent transparent #d6e0e5 transparent; padding: 7.0px 7.0px 7.0px 7.0px}
-    td.td2 {width: 139.0px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: transparent transparent #d6e0e5 transparent; padding: 7.0px 7.0px 7.0px 7.0px}
-    td.td3 {width: 78.0px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: transparent transparent #d6e0e5 transparent; padding: 7.0px 7.0px 7.0px 7.0px}
-    td.td4 {width: 135.0px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: transparent transparent #d6e0e5 transparent; padding: 7.0px 7.0px 7.0px 7.0px}
-    td.td5 {width: 74.0px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: transparent transparent #d6e0e5 transparent; padding: 7.0px 7.0px 7.0px 7.0px}
-    td.td6 {width: 210.0px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: transparent transparent #d6e0e5 transparent; padding: 7.0px 7.0px 7.0px 7.0px}
-    td.td7 {width: 194.0px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: transparent transparent #d6e0e5 transparent; padding: 7.0px 7.0px 7.0px 7.0px}
-    ul.ul1 {list-style-type: none}
-  </style>
+  <title>Tweedar</title>
 </head>
 <body>
 <p class="p1">TDRTweetsController Class Reference</p>
