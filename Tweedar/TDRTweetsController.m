@@ -127,8 +127,8 @@
             dispatch_async(dispatch_get_main_queue(),^{
                 if (urlResponse.statusCode == kHTTPStatusCodeOK)
                 {
-                        tweetRefForBlock.favorited = !tweetRefForBlock.favorited;
-                        completion(YES,nil);
+                    [self toggleFavoriteStatusForTweetObject:tweetRefForBlock];
+                    completion(YES,nil);
                 }
                 else
                 {
@@ -149,6 +149,11 @@
     return tweetSearchDictionary;
 }
 
+
+- (void)toggleFavoriteStatusForTweetObject:(TDRTweet *)tweet
+{
+    tweet.favorited = !tweet.favorited;
+}
 
 - (NSMutableArray *)boxAndSortTweetsByDate:(NSArray *)unsortedTweets
 {

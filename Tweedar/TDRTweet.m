@@ -35,10 +35,11 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Tweet - text = %@,text = %@,dateString = %@ lat = %lf  lon = %lf",
+    return [NSString stringWithFormat:@"Tweet - text = %@ text = %@ dateString = %@ favorited = %d lat = %lf lon = %lf",
             self.userHandle,
             self.tweetText,
             self.dateString,
+            self.favorited,
             self.coordinate.latitude,
             self.coordinate.longitude];
 }

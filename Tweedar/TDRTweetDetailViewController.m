@@ -50,6 +50,7 @@
     [self.tweetsController toggleFavoriteForTweet:self.tweet inBackgroundWithBlock:^(BOOL success, NSError *error) {
         if (success)
         {
+            NSLog(@"Tweet After Favorite: %@", self.tweet);
             [self setFavoriteButtonStatus];
         }
         else
@@ -107,11 +108,11 @@
 {
     if (self.tweet.favorited)
     {
-        [self.favoriteButton setTitle:kUnfavoriteTitleText forState:UIControlStateNormal];
+        [self.favoriteButton setTitle:kFavoriteTitleText forState:UIControlStateNormal];
     }
     else
     {
-        [self.favoriteButton setTitle:kFavoriteTitleText forState:UIControlStateNormal];
+        [self.favoriteButton setTitle:kUnfavoriteTitleText forState:UIControlStateNormal];
     }
 }
 @end
