@@ -8,7 +8,7 @@ Class Reference Documentation
 =============================
 
 TDRTweetsController Class Reference
-
+-----------------------------------
 Inherits from
 NSObject
 
@@ -279,20 +279,33 @@ Tasks
 		  tweetsController property
 
 Properties
+
 tweet
+
 The TDRTweet instance passed in for it’s details to be displayed.
+
 @property (strong, nonatomic) TDRTweet *tweet
+
 Discussion
+
 The TDRTweet instance passed in for it’s details to be displayed.
+
 Declared In
+
 TDRTweetDetailViewController.h
 
 tweetsController
+
 The instance of TDRTweetsController to interact with during operations to change the favorite status of the tweet being displayed.
+
 @property (strong, nonatomic) TDRTweetsController *tweetsController
+
 Discussion
+
 The instance of TDRTweetsController to interact with during operations to change the favorite status of the tweet being displayed.
+
 Declared In
+
 TDRTweetDetailViewController.h
 
 
