@@ -8,7 +8,7 @@
 
 #import "TDRTweetDetailViewController.h"
 
-#define kDebugOn YES
+#define kDebugOn NO
 #define kUnfavoriteTitleText @"Unfavorite"
 #define kFavoriteTitleText @"Favorite"
 
@@ -64,12 +64,11 @@
             [alert show];
         }
     }];
-
-
 }
 
 
 #pragma mark - Helper Methods
+
 - (void)setupVC
 {
     self.title = [NSString stringWithFormat:@"Tweet by %@",self.tweet.userHandle];

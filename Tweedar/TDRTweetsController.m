@@ -12,7 +12,8 @@
 
 #define kDebugOn NO
 #define kTwitterAPISearchTweetURLString @"https://api.twitter.com/1.1/search/tweets.json"
-#define kTwitterAPIRetweetURLString @"https://api.twitter.com/1.1/statuses/retweet/:id.json"
+#define kTwitterAPIRetweetURLStringPrefix @"https://api.twitter.com/1.1/statuses/retweet/"
+#define kTwitterAPIRetweetURLStringSuffix @".json"
 #define kTwitterAPIFavoriteURLString @"https://api.twitter.com/1.1/favorites/create.json"
 #define kTwitterAPIUnfavoriteURLString @"https://api.twitter.com/1.1/favorites/destroy.json"
 
@@ -29,6 +30,8 @@
 @property (strong, nonatomic) NSMutableArray *currentTweets;
 @property (strong, nonatomic) ACAccount *currentTwitterUserAccount;
 @property (strong, nonatomic) ACAccountStore *accountStore;
+@property (strong, nonatomic) NSMutableArray *favorites;
+@property (strong, nonatomic) NSURL *favoritesPlistURL;
 
 @end
 
@@ -74,9 +77,9 @@
 }
 
 
-#pragma mark - TweetController API Methods
+#pragma mark - TweetsController API Methods
 
-- (TDRTweet *)tweetAtIndex:(NSInteger)index;
+- (TDRTweet *)tweetAtIndex:(NSInteger)index
 {
     return self.currentTweets[index];
 }
