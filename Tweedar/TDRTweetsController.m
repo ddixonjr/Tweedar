@@ -171,22 +171,22 @@
 
 - (void)toggleFavoriteStatusForTweetObject:(TDRTweet *)tweet
 {
-    NSLog(@"favorites list before toggle: %@",self.favorites);
+    if (kDebugOn) NSLog(@"favorites list before toggle: %@",self.favorites);
 
     NSInteger indexOfFavoriteTweet = [self indexOfFavoritedTweet:tweet];
     if (indexOfFavoriteTweet != NSNotFound)
     {
-        NSLog(@"tweet id %@ favorited in favorites list %@",tweet.tweetID, self.favorites);
+        if (kDebugOn) NSLog(@"tweet id %@ favorited in favorites list %@",tweet.tweetID, self.favorites);
         [self.favorites removeObjectAtIndex:indexOfFavoriteTweet];
     }
     else
     {
-        NSLog(@"tweet id %@ unfavorited in favorites list %@",tweet.tweetID, self.favorites);
+        if (kDebugOn) NSLog(@"tweet id %@ unfavorited in favorites list %@",tweet.tweetID, self.favorites);
         [self.favorites addObject:tweet.tweetID];
     }
 
     [self.favorites writeToURL:self.favoritesPlistURL atomically:YES];
-    NSLog(@"favorites list after toggle: %@", self.favorites);
+    if (kDebugOn) NSLog(@"favorites list after toggle: %@", self.favorites);
 }
 
 
@@ -205,7 +205,7 @@
         }
     }
 
-    NSLog(@"index of favorited tweet ID in favorites array = %ld",indexOfFavoriteTweetID);
+    if (kDebugOn) NSLog(@"index of favorited tweet ID in favorites array = %ld",(long)indexOfFavoriteTweetID);
     return indexOfFavoriteTweetID;
 }
 

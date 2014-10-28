@@ -77,7 +77,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    NSLog(@"the tag of the view callout pressed is %ld",view.tag);
+    if (kDebugOn) NSLog(@"the tag of the view callout pressed is %ld",view.tag);
     [self performSegueWithIdentifier:@"TweetDetailSegue" sender:view];
 }
 
@@ -155,7 +155,7 @@
         TDRTweetDetailViewController *tweetDetailVC = segue.destinationViewController;
         MKPinAnnotationView *tweetPointAnnotationView = (MKPinAnnotationView *) sender;
         tweetDetailVC.tweet = [self.tweetsController tweetAtIndex:tweetPointAnnotationView.tag];
-        NSLog(@"in prepareForSegue: -- the tweet at tag %ld is %@",tweetPointAnnotationView.tag,tweetDetailVC.tweet);
+        if (kDebugOn) NSLog(@"in prepareForSegue: -- the tweet at tag %ld is %@",tweetPointAnnotationView.tag,tweetDetailVC.tweet);
         tweetDetailVC.tweetsController = self.tweetsController;
     }
 }
