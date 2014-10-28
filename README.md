@@ -8,13 +8,17 @@ Class Reference Documentation
 =============================
 
 TDRTweetsController Class Reference
+
 Inherits from
 NSObject
+
 Declared in
 TDRTweetsController.h
 TDRTweetsController.m
+
 Overview
 A controller class that abstracts the interaction with the Twitter API. It facilitates querying of Tweets within a certain proximity, retrieving individual TDRTweet instances, marking tweets as favorites, and revoking tweets as no longer being favorites. It was built to separate the functionality from and act as a service to view controllers in providing Twitter integration capabilities.
+
 Tasks
 		  delegate property
 		  currentNumberOfTweets property
@@ -24,40 +28,54 @@ Tasks
 		– isFavoritedTweet:
 
 Properties
+
 currentNumberOfTweets
 The number of tweets currently loaded and managed by an instance of TDRTweetsController.
+
 @property (assign, nonatomic) NSInteger currentNumberOfTweets
+
 Discussion
 The number of tweets currently loaded and managed by an instance of TDRTweetsController.
+
 Declared In
 TDRTweetsController.h
 
 delegate
 Reference to the object assigned to be the delegate of an instance of TDRTweetsController.
+
 @property (weak, nonatomic) id<TweetControllerDelegate> delegate
+
 Discussion
 Reference to the object assigned to be the delegate of an instance of TDRTweetsController.
+
 Declared In
 TDRTweetsController.h
 
 Instance Methods
+
 isFavoritedTweet:
 Queries the local store of favorited tweet IDs to determine whether or not the tweet passed in is has been favorited.
+
 - (BOOL)isFavoritedTweet:(TDRTweet *)tweet
+
 Parameters
 tweet
 The TDRTweet instance containing the ID needed to determine whether or not the tweet has been favorited.
+
 Discussion
 Queries the local store of favorited tweet IDs to determine whether or not the tweet passed in is has been favorited.
+
 Declared In
 TDRTweetsController.h
 
 startUpdatingTweetsForNewCoordinate:
 Instructs the TDRTweetsController to query Twitter for tweets within a certain proximity of a specified geolocation.
 - (void)startUpdatingTweetsForNewCoordinate:(CLLocationCoordinate2D)coordinate
+
 Parameters
 coordinate
 The CLLocationCoordinate2D struct containing the target center geolocation around which the tweets should be located.
+
 Discussion
 Instructs the TDRTweetsController to query Twitter for tweets within a certain proximity of a specified geolocation.
 Declared In
