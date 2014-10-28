@@ -29,14 +29,14 @@
 /**
  *  A delegate method called to indicate when user permission to access Twitter accounts has completed.
  *
- *  @param tweetsController The instance of TDRTweetController that completed the query.
+ *  @param tweetsController The instance of TDRTweetController that completed the authorization.
  */
 - (void)didObtainTwitterAccountInTweetsController:(TDRTweetsController *)tweetsController;
 
 /**
  *  A delegate method called to indicate when user permission to access Twitter accounts has failed.
  *
- *  @param tweetsController The instance of TDRTweetController that completed the query.
+ *  @param tweetsController The instance of TDRTweetController that attempted the authorization.
  */
 - (void)didFailToObtainTwitterAccountInTweetsController:(TDRTweetsController *)tweetsController;
 

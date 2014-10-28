@@ -10,7 +10,6 @@
 
 /**
  *  A concrete subclass of UIViewController that displays the geolocation of Tweets within a proximity of the running device.
- *
  */
 @interface TDRTweetsNearMeViewController : UIViewController
 
