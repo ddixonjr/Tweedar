@@ -2,10 +2,10 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
-  <title>Tweedar</title>
 </head>
 <body>
-<p class="p1">TDRTweetsController Class Reference</p>
+<h1>Tweedar</h1>
+<h2>TDRTweetsController Class Reference</h2>
 <table cellspacing="0" cellpadding="0" class="t1">
   <tbody>
     <tr>
@@ -29,7 +29,7 @@
 </table>
 <p class="p3"><br></p>
 <p class="p4">Overview</p>
-<p class="p5">A controller class that abstracts the interaction with the Twitter API. It facilitates querying of Tweets within a certain proximity, retrieving individual <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweet.html"><span class="s1">TDRTweet</span></a> instances, marking tweets as favorites, and revoking tweets as no longer being favorites. It was built to separate the functionality from and act as a service to view controllers in providing Twitter integration capabilities.</p>
+<p class="p5">A controller class that abstracts the interaction with the Twitter API. It facilitates querying of Tweets within a certain proximity, retrieving individual TDRTweet instances, marking tweets as favorites, and revoking tweets as no longer being favorites. It was built to separate the functionality from and act as a service to view controllers in providing Twitter integration capabilities.</p>
 <p class="p4">Tasks</p>
 <ul class="ul1">
   <li class="li6">  delegate<span class="s2"> </span><span class="s3">property</span></li>
@@ -63,7 +63,7 @@
 <p class="p9">- (BOOL)isFavoritedTweet:(TDRTweet *)<i>tweet</i></p>
 <p class="p10"><b>Parameters</b></p>
 <p class="p13">tweet</p>
-<p class="p8">The <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweet.html"><span class="s1">TDRTweet</span></a> instance containing the ID needed to determine whether or not the tweet has been favorited.</p>
+<p class="p8">The TDRTweet instance containing the ID needed to determine whether or not the tweet has been favorited.</p>
 <p class="p10"><b>Discussion</b></p>
 <p class="p8">Queries the local store of favorited tweet IDs to determine whether or not the tweet passed in is has been favorited.</p>
 <p class="p10"><b>Declared In</b></p>
@@ -85,7 +85,7 @@
 <p class="p9">- (void)toggleFavoriteForTweet:(TDRTweet *)<i>tweet</i> inBackgroundWithBlock:(void ( ^ ) ( BOOL success , NSError *error ))<i>completion</i></p>
 <p class="p10"><b>Parameters</b></p>
 <p class="p13">tweet</p>
-<p class="p8">The <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweet.html"><span class="s1">TDRTweet</span></a> instance containing the ID needed to invoke the Twitter API call on the correct tweet.</p>
+<p class="p8">The TDRTweet instance containing the ID needed to invoke the Twitter API call on the correct tweet.</p>
 <p class="p13">completion</p>
 <p class="p8">The block called after a response has been received from the Twitter Framework.</p>
 <p class="p10"><b>Discussion</b></p>
@@ -100,7 +100,7 @@
 <p class="p13">index</p>
 <p class="p8">The index of the tweet object in the current pool of tweets.</p>
 <p class="p10"><b>Return Value</b></p>
-<p class="p8">The instance of a <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweet.html"><span class="s1">TDRTweet</span></a> at the index specified in the index parameter.</p>
+<p class="p8">The instance of a TDRTweet at the index specified in the index parameter.</p>
 <p class="p10"><b>Discussion</b></p>
 <p class="p8">Retrieves the data model object that represents a single tweet in the current pool of tweets managed by TDRTweetsController.</p>
 <p class="p10"><b>Declared In</b></p>
@@ -131,7 +131,7 @@
 </table>
 <p class="p3"><br></p>
 <p class="p4">Overview</p>
-<p class="p5">A protocol to allow instances of <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweetsController.html"><span class="s1">TDRTweetsController</span></a> to loosely communicate certain changes in state with its delegate object.</p>
+<p class="p5">A protocol to allow instances of TDRTweetsController to loosely communicate certain changes in state with its delegate object.</p>
 <p class="p4">Tasks</p>
 <ul class="ul1">
   <li class="li6">– tweetsDidChangeInTweetsController:<span class="s2"> </span><span class="s3">required method</span></li>
@@ -177,7 +177,7 @@
 <p class="p14"><br></p>
 <p class="p14"><br></p>
 <p class="p14"><br></p>
-<p class="p1">TDRTweet Class Reference</p>
+<h2>TDRTweet Class Reference</h2>
 <table cellspacing="0" cellpadding="0" class="t1">
   <tbody>
     <tr>
@@ -289,7 +289,7 @@
 <p class="p14"><br></p>
 <p class="p14"><br></p>
 <p class="p14"><br></p>
-<p class="p1">TDRTweetsNearMeViewController Class Reference</p>
+<h2>TDRTweetsNearMeViewController Class Reference</h2>
 <table cellspacing="0" cellpadding="0" class="t1">
   <tbody>
     <tr>
@@ -316,7 +316,7 @@
 <p class="p5">A concrete subclass of UIViewController that displays the geolocation of Tweets within a proximity of the running device.</p>
 <p class="p16"><br></p>
 <p class="p16"><br></p>
-<p class="p1">TDRTweetDetailViewController Class Reference</p>
+<h2>TDRTweetDetailViewController Class Reference</h2>
 <table cellspacing="0" cellpadding="0" class="t1">
   <tbody>
     <tr>
@@ -340,7 +340,7 @@
 </table>
 <p class="p3"><br></p>
 <p class="p4">Overview</p>
-<p class="p5">A concrete subclass of UIViewController that displays details of a specifict Tweet passed in as a <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweet.html"><span class="s1">TDRTweet</span></a> instance via the <span class="s1">tweet</span> property. It also facilitates the <span class="s1">tweet</span> being toggled on/off as a favorite by the user.</p>
+<p class="p5">A concrete subclass of UIViewController that displays details of a specifict Tweet passed in as a TDRTweet instance via the <span class="s1">tweet</span> property. It also facilitates the <span class="s1">tweet</span> being toggled on/off as a favorite by the user.</p>
 <p class="p4">Tasks</p>
 <ul class="ul1">
   <li class="li6">  tweet<span class="s2"> </span><span class="s3">property</span></li>
@@ -349,18 +349,18 @@
 <p class="p3"><br></p>
 <p class="p4">Properties</p>
 <p class="p7">tweet</p>
-<p class="p8">The <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweet.html"><span class="s1">TDRTweet</span></a> instance passed in for it’s details to be displayed.</p>
+<p class="p8">The TDRTweet instance passed in for it’s details to be displayed.</p>
 <p class="p9">@property (strong, nonatomic) TDRTweet *tweet</p>
 <p class="p10"><b>Discussion</b></p>
-<p class="p8">The <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweet.html"><span class="s1">TDRTweet</span></a> instance passed in for it’s details to be displayed.</p>
+<p class="p8">The TDRTweet instance passed in for it’s details to be displayed.</p>
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetDetailViewController.h</p>
 <p class="p12"><br></p>
 <p class="p7">tweetsController</p>
-<p class="p8">The instance of <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweetsController.html"><span class="s1">TDRTweetsController</span></a> to interact with during operations to change the favorite status of the <span class="s1">tweet</span> being displayed.</p>
+<p class="p8">The instance of TDRTweetsController to interact with during operations to change the favorite status of the <span class="s1">tweet</span> being displayed.</p>
 <p class="p9">@property (strong, nonatomic) TDRTweetsController *tweetsController</p>
 <p class="p10"><b>Discussion</b></p>
-<p class="p8">The instance of <a href="file:///Users/Dennis/Library/Developer/Shared/Documentation/DocSets/com.appivot.tweedar.Tweedar.docset/Contents/Resources/Documents/Classes/TDRTweetsController.html"><span class="s1">TDRTweetsController</span></a> to interact with during operations to change the favorite status of the <span class="s1">tweet</span> being displayed.</p>
+<p class="p8">The instance of TDRTweetsController to interact with during operations to change the favorite status of the <span class="s1">tweet</span> being displayed.</p>
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetDetailViewController.h</p>
 <p class="p17"><br></p>
