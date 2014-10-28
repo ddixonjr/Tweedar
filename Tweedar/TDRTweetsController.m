@@ -53,7 +53,11 @@
                 if ([self.delegate respondsToSelector:@selector(didObtainTwitterAccountInTweetsController:)])
                 {
                     [self.delegate didObtainTwitterAccountInTweetsController:self];
-                    self.favorites = [NSMutableArray array];
+                    self.favorites = [NSMutableArray arrayWithContentsOfURL:self.favoritesPlistURL];
+                    if (!self.favorites)
+                    {
+                        self.favorites = [NSMutableArray array];
+                    }
                 }
             }
             else
@@ -177,8 +181,9 @@
         NSLog(@"tweet id %@ unfavorited in favorites list %@",tweet.tweetID, self.favorites);
         [self.favorites addObject:tweet.tweetID];
     }
-    NSLog(@"favorites list after toggle: %@", self.favorites);
 
+    [self.favorites writeToURL:self.favoritesPlistURL atomically:YES];
+    NSLog(@"favorites list after toggle: %@", self.favorites);
 }
 
 
@@ -234,6 +239,7 @@
 
 
 
+
 #pragma mark - Overidden Accessors
 
 - (ACAccountStore *)accountStore
@@ -245,5 +251,17 @@
 
     return _accountStore;
 }
+
+
+- (NSURL *)favoritesPlistURL
+{
+    if (!_favoritesPlistURL)
+    {
+        NSURL *baseFilePathURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+        _favoritesPlistURL = [baseFilePathURL URLByAppendingPathComponent:@"Favorites.plist"];
+    }
+    return _favoritesPlistURL;
+}
+
 
 @end
