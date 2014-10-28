@@ -28,9 +28,9 @@
   </tbody>
 </table>
 <p class="p3"><br></p>
-<p class="p4">Overview</p>
+<p class="p4"><b>Overview</b></p>
 <p class="p5">A controller class that abstracts the interaction with the Twitter API. It facilitates querying of Tweets within a certain proximity, retrieving individual TDRTweet instances, marking tweets as favorites, and revoking tweets as no longer being favorites. It was built to separate the functionality from and act as a service to view controllers in providing Twitter integration capabilities.</p>
-<p class="p4">Tasks</p>
+<p class="p4"><b>Tasks</b></p>
 <ul class="ul1">
   <li class="li6">  delegate<span class="s2"> </span><span class="s3">property</span></li>
   <li class="li6">  currentNumberOfTweets<span class="s2"> </span><span class="s3">property</span></li>
@@ -40,7 +40,7 @@
   <li class="li6">– isFavoritedTweet:</li>
 </ul>
 <p class="p3"><br></p>
-<p class="p4">Properties</p>
+<p class="p4"><b>Properties</b></p>
 <p class="p7">currentNumberOfTweets</p>
 <p class="p8">The number of tweets currently loaded and managed by an instance of TDRTweetsController.</p>
 <p class="p9">@property (assign, nonatomic) NSInteger currentNumberOfTweets</p>
@@ -108,7 +108,7 @@
 <p class="p14"><br></p>
 <p class="p14"><br></p>
 <p class="p14"><br></p>
-<p class="p1">TweetControllerDelegate Protocol Reference</p>
+<h2>TweetControllerDelegate Protocol Reference</h2>
 <table cellspacing="0" cellpadding="0" class="t1">
   <tbody>
     <tr>
@@ -130,16 +130,16 @@
   </tbody>
 </table>
 <p class="p3"><br></p>
-<p class="p4">Overview</p>
+<p class="p4"><b>Overview</b></p>
 <p class="p5">A protocol to allow instances of TDRTweetsController to loosely communicate certain changes in state with its delegate object.</p>
-<p class="p4">Tasks</p>
+<p class="p4"><b>Tasks</b></p>
 <ul class="ul1">
   <li class="li6">– tweetsDidChangeInTweetsController:<span class="s2"> </span><span class="s3">required method</span></li>
   <li class="li6">– didObtainTwitterAccountInTweetsController:</li>
   <li class="li6">– didFailToObtainTwitterAccountInTweetsController:</li>
 </ul>
 <p class="p3"><br></p>
-<p class="p4">Instance Methods</p>
+<p class="p4"><b>Instance Methods</b></p>
 <p class="p7">didFailToObtainTwitterAccountInTweetsController:</p>
 <p class="p8">A delegate method called to indicate when user permission to access Twitter accounts has failed.</p>
 <p class="p9">- (void)didFailToObtainTwitterAccountInTweetsController:(TDRTweetsController *)<i>tweetsController</i></p>
@@ -200,9 +200,9 @@
   </tbody>
 </table>
 <p class="p3"><br></p>
-<p class="p4">Overview</p>
+<p class="p4"><b>Overview</b></p>
 <p class="p5">A data model class designed to store the details of a single tweet.</p>
-<p class="p4">Tasks</p>
+<p class="p4"><b>Tasks</b></p>
 <ul class="ul1">
   <li class="li6">  userHandle<span class="s2"> </span><span class="s3">property</span></li>
   <li class="li6">  tweetID<span class="s2"> </span><span class="s3">property</span></li>
@@ -213,7 +213,7 @@
   <li class="li6">– initWithUserHandle:tweetID:tweetText:timestamp:latitude:longitude:</li>
 </ul>
 <p class="p3"><br></p>
-<p class="p4">Properties</p>
+<p class="p4"><b>Properties</b></p>
 <p class="p7">avatarURLString</p>
 <p class="p8">The URL of the avatar image for the Twitter user who posted the tweet represented by the new instance of TDRTweet.</p>
 <p class="p9">@property (strong, nonatomic) NSString *avatarURLString</p>
@@ -263,7 +263,7 @@
 <p class="p11">TDRTweet.h</p>
 <p class="p14"><br></p>
 <p class="p15"><br></p>
-<p class="p4">Instance Methods</p>
+<p class="p4"><b>Instance Methods</b></p>
 <p class="p7">initWithUserHandle:tweetID:tweetText:timestamp:latitude:longitude:</p>
 <p class="p8">&lt;#Description#&gt;</p>
 <p class="p9">- (instancetype)initWithUserHandle:(NSString *)<i>userHandle</i> tweetID:(NSString *)<i>tweetID</i> tweetText:(NSString *)<i>tweetText</i> timestamp:(NSString *)<i>dateString</i> latitude:(NSNumber *)<i>latitude</i> longitude:(NSNumber *)<i>longitude</i></p>
@@ -312,7 +312,7 @@
   </tbody>
 </table>
 <p class="p3"><br></p>
-<p class="p4">Overview</p>
+<p class="p4"><b>Overview</b></p>
 <p class="p5">A concrete subclass of UIViewController that displays the geolocation of Tweets within a proximity of the running device.</p>
 <p class="p16"><br></p>
 <p class="p16"><br></p>
@@ -339,15 +339,15 @@
   </tbody>
 </table>
 <p class="p3"><br></p>
-<p class="p4">Overview</p>
+<p class="p4"><b>Overview</b></p>
 <p class="p5">A concrete subclass of UIViewController that displays details of a specifict Tweet passed in as a TDRTweet instance via the <span class="s1">tweet</span> property. It also facilitates the <span class="s1">tweet</span> being toggled on/off as a favorite by the user.</p>
-<p class="p4">Tasks</p>
+<p class="p4"><b>Tasks</b></p>
 <ul class="ul1">
   <li class="li6">  tweet<span class="s2"> </span><span class="s3">property</span></li>
   <li class="li6">  tweetsController<span class="s2"> </span><span class="s3">property</span></li>
 </ul>
 <p class="p3"><br></p>
-<p class="p4">Properties</p>
+<p class="p4"><b>Properties</b></p>
 <p class="p7">tweet</p>
 <p class="p8">The TDRTweet instance passed in for it’s details to be displayed.</p>
 <p class="p9">@property (strong, nonatomic) TDRTweet *tweet</p>
