@@ -231,8 +231,6 @@
                                                   longitude:curTweetCoordinate[kIndexLon]];
 
         newTweet.avatarURLString = (![curTweetUser[@"profile_image_url"] isEqual:[NSNull null]]) ? curTweetUser[@"profile_image_url"] : nil;
-        NSNumber *curFavoriteStatusNumber = curTweet[@"favorite_count"];
-        newTweet.favorited = ([curFavoriteStatusNumber integerValue] > 0) ? YES : NO;
 
         [boxedAndSortedTweets addObject:newTweet];
     }
