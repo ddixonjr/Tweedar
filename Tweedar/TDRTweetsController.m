@@ -12,6 +12,12 @@
 
 #define kDebugOn NO
 #define kTwitterAPISearchTweetURLString @"https://api.twitter.com/1.1/search/tweets.json"
+#define kTwitterAPIRetweetURLString @"https://api.twitter.com/1.1/statuses/retweet/:id.json"
+#define kTwitterAPIFavoriteURLString @"https://api.twitter.com/1.1/favorites/create.json"
+#define kTwitterAPIUnfavoriteURLString @"https://api.twitter.com/1.1/favorites/destroy.json"
+
+#define kHTTPStatusCodeOK 200
+
 #define kDefaultCoordinateParameter @"40.1323882,-75.1379737,1mi"
 #define kIndexLat 0
 #define kIndexLon 1
@@ -23,12 +29,14 @@
 @property (strong, nonatomic) NSMutableArray *currentTweets;
 @property (strong, nonatomic) ACAccount *currentTwitterUserAccount;
 @property (strong, nonatomic) ACAccountStore *accountStore;
-@property (strong, nonatomic) TWRequest *twitterRequest;
 
 @end
 
 
 @implementation TDRTweetsController
+
+
+#pragma mark - Initializer Methods
 
 - (instancetype)init
 {
@@ -75,9 +83,9 @@
     dispatch_async(backgroundQueue, ^{
         NSDictionary *tweetSearchParameters  = [self buildTweetSearchParametersWithCoordinate:coordinate];
         NSURL *tweetSearchURL = [NSURL URLWithString:kTwitterAPISearchTweetURLString];
-        self.twitterRequest = [[TWRequest alloc] initWithURL:tweetSearchURL parameters:tweetSearchParameters requestMethod:TWRequestMethodGET];
-        self.twitterRequest.account = self.currentTwitterUserAccount;
-        [self.twitterRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+        TWRequest *twitterTweetSearchRequest = [[TWRequest alloc] initWithURL:tweetSearchURL parameters:tweetSearchParameters requestMethod:TWRequestMethodGET];
+        twitterTweetSearchRequest.account = self.currentTwitterUserAccount;
+        [twitterTweetSearchRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
         {
             if (!error && responseData)
             {
@@ -98,6 +106,40 @@
 }
 
 
+- (void)toggleFavoriteForTweet:(TDRTweet *)tweet inBackgroundWithBlock:(void(^)(BOOL success, NSError *error))completion
+
+{
+    __block TDRTweet *tweetRefForBlock = tweet;
+
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    dispatch_async(backgroundQueue, ^{
+        NSString *tweetFavoriteURLString = (tweetRefForBlock.favorited) ?
+            kTwitterAPIUnfavoriteURLString : kTwitterAPIFavoriteURLString;
+        NSURL *tweetFavoriteURL = [NSURL URLWithString:tweetFavoriteURLString];
+        NSDictionary *tweetFavoriteParameters = @{@"id":tweetRefForBlock.tweetID};
+
+        TWRequest *twitterFavoriteRequest = [[TWRequest alloc]initWithURL:tweetFavoriteURL
+                                                          parameters:tweetFavoriteParameters
+                                                       requestMethod:TWRequestMethodPOST];
+        twitterFavoriteRequest.account = self.currentTwitterUserAccount;
+
+        [twitterFavoriteRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                if (urlResponse.statusCode == kHTTPStatusCodeOK)
+                {
+                        tweetRefForBlock.favorited = !tweetRefForBlock.favorited;
+                        completion(YES,nil);
+                }
+                else
+                {
+                    completion(NO,error);
+                }
+            });
+        }];
+    });
+}
+
+
 #pragma mark - Helper Methods
 
 - (NSDictionary *)buildTweetSearchParametersWithCoordinate:(CLLocationCoordinate2D)coordinate
@@ -106,6 +148,7 @@
     NSDictionary *tweetSearchDictionary = @{@"geocode":geocodeString,@"count":kMaxTweets};
     return tweetSearchDictionary;
 }
+
 
 - (NSMutableArray *)boxAndSortTweetsByDate:(NSArray *)unsortedTweets
 {
@@ -117,17 +160,27 @@
         NSDictionary *curTweetCoordinateDictionary = curTweet[@"coordinates"];
         NSArray *curTweetCoordinate = (![curTweetCoordinateDictionary isEqual:[NSNull null]]) ?
                                         curTweetCoordinateDictionary[@"coordinates"] : kZeroCoordinateArray;
+
+        NSNumber *curTweetIDNumber = curTweet[@"id"];
+        NSString *curTweetID = [curTweetIDNumber stringValue];
         TDRTweet *newTweet = [[TDRTweet alloc] initWithUserHandle:curTweetUser[@"name"]
-                                                  tweetText:curTweet[@"text"]
+                                                          tweetID:curTweetID
+                                                        tweetText:curTweet[@"text"]
                                                   timestamp:curTweet[@"created_at"]
                                                    latitude:curTweetCoordinate[kIndexLat]
                                                   longitude:curTweetCoordinate[kIndexLon]];
+
         newTweet.avatarURLString = (![curTweetUser[@"profile_image_url"] isEqual:[NSNull null]]) ? curTweetUser[@"profile_image_url"] : nil;
+        NSNumber *curFavoriteStatusNumber = curTweet[@"favorited"];
+        newTweet.favorited = [curFavoriteStatusNumber boolValue];
+
         [boxedAndSortedTweets addObject:newTweet];
     }
 
     return boxedAndSortedTweets;
 }
+
+
 
 #pragma mark - Overidden Accessors
 
@@ -140,7 +193,5 @@
 
     return _accountStore;
 }
-
-
 
 @end

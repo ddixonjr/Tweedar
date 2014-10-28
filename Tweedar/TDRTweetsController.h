@@ -31,5 +31,6 @@
 
 - (TDRTweet *)tweetAtIndex:(NSInteger)index;
 - (void)startUpdatingTweetsForNewCoordinate:(CLLocationCoordinate2D)coordinate;
+- (void)toggleFavoriteForTweet:(TDRTweet *)tweet inBackgroundWithBlock:(void(^)(BOOL success, NSError *error))completion;
 
 @end

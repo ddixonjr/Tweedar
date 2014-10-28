@@ -12,6 +12,7 @@
 @implementation TDRTweet
 
 - (instancetype)initWithUserHandle:(NSString *)userHandle
+                           tweetID:(NSString *)tweetID
                          tweetText:(NSString *)tweetText
                          timestamp:(NSString *)dateString
                           latitude:(NSNumber *)latitude
@@ -21,6 +22,7 @@
     if (self)
     {
         _userHandle = userHandle;
+        _tweetID = tweetID;
         _tweetText = tweetText;
         _dateString = dateString;
         _coordinate = CLLocationCoordinate2DMake([longitude doubleValue], [latitude doubleValue]);

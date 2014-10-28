@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "TDRTweet.h"
+#import "TDRTweetsController.h"
 
 @interface TDRTweetDetailViewController : UIViewController
 
 @property (strong, nonatomic) TDRTweet *tweet;
+@property (strong, nonatomic) TDRTweetsController *tweetsController;
 
 @end

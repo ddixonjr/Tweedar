@@ -24,7 +24,7 @@
 #define kDefaultTweetRefreshInterval 15.0
 
 
-@interface TDRTweetsNearMeViewController () <MKMapViewDelegate,TweetControllerDelegate,CLLocationManagerDelegate>
+@interface TDRTweetsNearMeViewController () <MKMapViewDelegate,CLLocationManagerDelegate,TweetControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *tweetsMapView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *refreshActivityView;
@@ -41,6 +41,7 @@
 
 @implementation TDRTweetsNearMeViewController
 
+
 #pragma mark - UIViewController Lifecycle Methods
 
 - (void)viewDidLoad {
@@ -50,20 +51,6 @@
 
 
 #pragma mark - MKMapViewDelegate Methods
-
-//- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-//{
-//    self.curLocation = userLocation.location;
-//    [self setTweetMapViewToCoordinate:self.curLocation.coordinate];
-//}
-//
-//- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
-//{
-//    self.curLocation = [[CLLocation alloc] initWithLatitude:kDefaultCoordinateLat longitude:kDefaultCoordinateLon];
-//    [self setTweetMapViewToCoordinate:self.curLocation.coordinate];
-//    if (kDebugOn) NSLog(@"Failed to locate user - using default location: %@",error);
-//}
-
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
@@ -90,6 +77,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
+    NSLog(@"the tag of the view callout pressed is %ld",view.tag);
     [self performSegueWithIdentifier:@"TweetDetailSegue" sender:view];
 }
 
@@ -167,6 +155,8 @@
         TDRTweetDetailViewController *tweetDetailVC = segue.destinationViewController;
         MKPinAnnotationView *tweetPointAnnotationView = (MKPinAnnotationView *) sender;
         tweetDetailVC.tweet = [self.tweetsController tweetAtIndex:tweetPointAnnotationView.tag];
+        NSLog(@"in prepareForSegue: -- the tweet at tag %ld is %@",tweetPointAnnotationView.tag,tweetDetailVC.tweet);
+        tweetDetailVC.tweetsController = self.tweetsController;
     }
 }
 
@@ -212,6 +202,8 @@
 
 - (void)refreshTweetMap
 {
+    NSArray *allCurAnnotations = self.tweetsMapView.annotations;
+    [self.tweetsMapView removeAnnotations:allCurAnnotations];
     [self.refreshActivityView startAnimating];
     [self.tweetsController startUpdatingTweetsForNewCoordinate:self.curLocation.coordinate];
 }

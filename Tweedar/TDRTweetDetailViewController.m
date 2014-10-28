@@ -9,6 +9,8 @@
 #import "TDRTweetDetailViewController.h"
 
 #define kDebugOn YES
+#define kUnfavoriteTitleText @"Unfavorite"
+#define kFavoriteTitleText @"Favorite"
 
 
 @interface TDRTweetDetailViewController ()
@@ -18,18 +20,62 @@
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
 @property (weak, nonatomic) IBOutlet UILabel *tweetDateString;
 @property (weak, nonatomic) IBOutlet UILabel *tweetCoordinateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+@property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 
 @end
 
 @implementation TDRTweetDetailViewController
 
+
+#pragma mark - UIViewController Lifecycle Methods
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupVC];
+}
 
+
+#pragma mark - IBAction Methods
+
+- (IBAction)onRetweetButtonPressed
+{
+    if (kDebugOn) NSLog(@"Retweet Button Pressed");
+}
+
+
+- (IBAction)onFavoriteButtonPressed
+{
+    if (kDebugOn) NSLog(@"Favorite Button Pressed");
+    [self.tweetsController toggleFavoriteForTweet:self.tweet inBackgroundWithBlock:^(BOOL success, NSError *error) {
+        if (success)
+        {
+            [self setFavoriteButtonStatus];
+        }
+        else
+        {
+            if (kDebugOn) NSLog(@"Attempt to change favorite status failed: %@",error);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to Change Favorite Status"
+                                                            message:@"Please try again later"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
+
+
+}
+
+
+#pragma mark - Helper Methods
+- (void)setupVC
+{
     self.title = [NSString stringWithFormat:@"Tweet by %@",self.tweet.userHandle];
     self.tweetDateString.text = self.tweet.dateString;
     self.tweetCoordinateLabel.text = [NSString stringWithFormat:@"Lat: %0.4lf, Lon: %0.4lf",self.tweet.coordinate.latitude,self.tweet.coordinate.longitude];
     self.tweetTextView.text = self.tweet.tweetText;
+    [self setFavoriteButtonStatus];
     [self retrieveAvatar];
 }
 
@@ -56,4 +102,16 @@
     }
 }
 
+
+- (void)setFavoriteButtonStatus
+{
+    if (self.tweet.favorited)
+    {
+        [self.favoriteButton setTitle:kUnfavoriteTitleText forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.favoriteButton setTitle:kFavoriteTitleText forState:UIControlStateNormal];
+    }
+}
 @end
