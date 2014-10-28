@@ -108,11 +108,11 @@
 {
     if (self.tweet.favorited)
     {
-        [self.favoriteButton setTitle:kFavoriteTitleText forState:UIControlStateNormal];
+        [self.favoriteButton setTitle:kUnfavoriteTitleText forState:UIControlStateNormal];
     }
     else
     {
-        [self.favoriteButton setTitle:kUnfavoriteTitleText forState:UIControlStateNormal];
+        [self.favoriteButton setTitle:kFavoriteTitleText forState:UIControlStateNormal];
     }
 }
 @end

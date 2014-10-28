@@ -10,7 +10,7 @@
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
 
-#define kDebugOn NO
+#define kDebugOn YES
 #define kTwitterAPISearchTweetURLString @"https://api.twitter.com/1.1/search/tweets.json"
 #define kTwitterAPIRetweetURLString @"https://api.twitter.com/1.1/statuses/retweet/:id.json"
 #define kTwitterAPIFavoriteURLString @"https://api.twitter.com/1.1/favorites/create.json"
@@ -176,8 +176,8 @@
                                                   longitude:curTweetCoordinate[kIndexLon]];
 
         newTweet.avatarURLString = (![curTweetUser[@"profile_image_url"] isEqual:[NSNull null]]) ? curTweetUser[@"profile_image_url"] : nil;
-        NSNumber *curFavoriteStatusNumber = curTweet[@"favorited"];
-        newTweet.favorited = [curFavoriteStatusNumber boolValue];
+        NSNumber *curFavoriteStatusNumber = curTweet[@"favorite_count"];
+        newTweet.favorited = ([curFavoriteStatusNumber integerValue] > 0) ? YES : NO;
 
         [boxedAndSortedTweets addObject:newTweet];
     }
