@@ -16,10 +16,11 @@
 #define kDebugOn NO
 #define kDefaultCoordinateSpanLat 0.07
 #define kDefaultCoordinateSpanLon 0.07
-#define kDefaultCoordinateLat 40.1323882
-#define kDefaultCoordinateLon -75.1379737
+#define kDefaultCoordinateLat 37.3321082
+#define kDefaultCoordinateLon -122.0307465
 #define kLocationAccuracyTolerance 2000
-
+#define kLocationAccuracyPinpoint 1.0
+#define kLocationAltitudeDefault 0.0
 #define kTweetPinAnnotationReuseID @"TweetPin"
 #define kDefaultTweetRefreshInterval 15.0
 
@@ -34,6 +35,7 @@
 @property (assign, nonatomic) MKCoordinateRegion curRegion;
 @property (assign, nonatomic) MKCoordinateSpan curSpan;
 @property (strong, nonatomic) CLLocation *curLocation;
+@property (strong, nonatomic) CLLocation *defaultCurrentLocation;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
@@ -77,7 +79,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    if (kDebugOn) NSLog(@"the tag of the view callout pressed is %ld",view.tag);
+    if (kDebugOn) NSLog(@"the tag of the view callout pressed is %ld",(long)view.tag);
     [self performSegueWithIdentifier:@"TweetDetailSegue" sender:view];
 }
 
@@ -101,20 +103,25 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+    [self.locationManager stopUpdatingLocation];
+
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to Detect Current Location"
-                                                    message:@"Please enable location services for Tweedar in the Settings App"
+                                                    message:@"Please enable location services for Tweedar in Settings > Privacy > Location Services.  Using default location until then."
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
+
+    self.curLocation = self.defaultCurrentLocation;
+    [self setTweetMapViewToCoordinate:self.curLocation.coordinate];
+
 }
 
 #pragma mark - TweetControllerDelegate Methods
 
 - (void)didObtainTwitterAccountInTweetsController:(TDRTweetsController *)tweetsController
 {
-    CLLocationCoordinate2D testCoordinate =  CLLocationCoordinate2DMake(kDefaultCoordinateLat,kDefaultCoordinateLon);
-    [self.tweetsController startUpdatingTweetsForNewCoordinate:testCoordinate];
+    [self.tweetsController startUpdatingTweetsForNewCoordinate:self.curLocation.coordinate];
     [self.refreshActivityView startAnimating];
     if (kDebugOn) NSLog(@"in delegate method didObtainTwitterAccountInTwitterController");
 
@@ -155,7 +162,7 @@
         TDRTweetDetailViewController *tweetDetailVC = segue.destinationViewController;
         MKPinAnnotationView *tweetPointAnnotationView = (MKPinAnnotationView *) sender;
         tweetDetailVC.tweet = [self.tweetsController tweetAtIndex:tweetPointAnnotationView.tag];
-        if (kDebugOn) NSLog(@"in prepareForSegue: -- the tweet at tag %ld is %@",tweetPointAnnotationView.tag,tweetDetailVC.tweet);
+        if (kDebugOn) NSLog(@"in prepareForSegue: -- the tweet at tag %ld is %@",(long)tweetPointAnnotationView.tag,tweetDetailVC.tweet);
         tweetDetailVC.tweetsController = self.tweetsController;
     }
 }
@@ -173,6 +180,12 @@
 
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
+    CLLocationCoordinate2D defaultLocationCoordinate = CLLocationCoordinate2DMake(kDefaultCoordinateLat,kDefaultCoordinateLon);
+    self.defaultCurrentLocation = [[CLLocation alloc] initWithCoordinate:defaultLocationCoordinate
+                                                                altitude:kLocationAltitudeDefault
+                                                      horizontalAccuracy:kLocationAccuracyPinpoint
+                                                        verticalAccuracy:kLocationAccuracyPinpoint
+                                                               timestamp:[NSDate date]];
     [self.locationManager startUpdatingLocation];
 
     self.tweetsController = [[TDRTweetsController alloc] init];
