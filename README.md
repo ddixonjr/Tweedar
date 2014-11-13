@@ -6,7 +6,6 @@
 <body>
 <h1>Tweedar</h1>
 <p>Tweedar is a simple but cool demo/portfolio app that displays up to 100 tweets near your current location.  I coded it in response to a code challenge and, in line with good OO and iOS design patterns, created a clean separation of view/view controller responsibilties from those of the network interaction and model.</p>
-<p><br></p>
 <p>The class reference documentation below describes those responsibilities along with the APIs that facilitate interaction between the classes that make up the app.</p>
 <p><br></p>
 <h2>TDRTweetsController Class Reference</h2>
