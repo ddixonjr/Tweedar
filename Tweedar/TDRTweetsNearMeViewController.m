@@ -22,7 +22,7 @@
 #define kLocationAccuracyPinpoint 1.0
 #define kLocationAltitudeDefault 0.0
 #define kTweetPinAnnotationReuseID @"TweetPin"
-#define kDefaultTweetRefreshInterval 15.0
+#define kDefaultTweetRefreshInterval 60.0
 
 
 @interface TDRTweetsNearMeViewController () <MKMapViewDelegate,CLLocationManagerDelegate,TweetControllerDelegate>
@@ -117,7 +117,7 @@
 
 }
 
-#pragma mark - TweetControllerDelegate Methods
+#pragma mark - TweetsControllerDelegate Methods
 
 - (void)didObtainTwitterAccountInTweetsController:(TDRTweetsController *)tweetsController
 {
@@ -173,12 +173,12 @@
 - (void)setupTweetsVC
 {
     [self.refreshActivityView stopAnimating];
-    self.refreshActivityView.tintColor = [UIColor blueColor];
 
     self.tweetsMapView.delegate = self;
-    self.tweetsMapView.showsUserLocation = YES;
+//    self.tweetsMapView.showsUserLocation = YES;
 
     self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager requestAlwaysAuthorization];
     self.locationManager.delegate = self;
     CLLocationCoordinate2D defaultLocationCoordinate = CLLocationCoordinate2DMake(kDefaultCoordinateLat,kDefaultCoordinateLon);
     self.defaultCurrentLocation = [[CLLocation alloc] initWithCoordinate:defaultLocationCoordinate

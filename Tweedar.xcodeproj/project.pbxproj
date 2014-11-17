@@ -35,7 +35,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		952076351A16B16A00E39F5E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9520763B1A16B4C800E39F5E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		953FD53319FAB63700837367 /* Tweedar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweedar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		953FD53719FAB63700837367 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953FD53819FAB63700837367 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -163,6 +177,7 @@
 				953FD56C19FE861600837367 /* Accounts.framework */,
 				953FD56A19FE823A00837367 /* CoreLocation.framework */,
 				953FD55F19FAE90400837367 /* MapKit.framework */,
+				9520763B1A16B4C800E39F5E /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -177,6 +192,7 @@
 				953FD52F19FAB63700837367 /* Sources */,
 				953FD53019FAB63700837367 /* Frameworks */,
 				953FD53119FAB63700837367 /* Resources */,
+				952076351A16B16A00E39F5E /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -216,6 +232,7 @@
 				TargetAttributes = {
 					953FD53219FAB63700837367 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = WLB55W34QV;
 					};
 					953FD54B19FAB63700837367 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -395,6 +412,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -414,6 +433,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

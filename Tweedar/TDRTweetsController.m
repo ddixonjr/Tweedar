@@ -9,6 +9,7 @@
 #import "TDRTweetsController.h"
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
+#import <Social/Social.h>
 
 #define kDebugOn NO
 #define kTwitterAPISearchTweetURLString @"https://api.twitter.com/1.1/search/tweets.json"
@@ -91,7 +92,11 @@
     dispatch_async(backgroundQueue, ^{
         NSDictionary *tweetSearchParameters  = [self buildTweetSearchParametersWithCoordinate:coordinate];
         NSURL *tweetSearchURL = [NSURL URLWithString:kTwitterAPISearchTweetURLString];
-        TWRequest *twitterTweetSearchRequest = [[TWRequest alloc] initWithURL:tweetSearchURL parameters:tweetSearchParameters requestMethod:TWRequestMethodGET];
+        SLRequest *twitterTweetSearchRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                                  requestMethod:SLRequestMethodGET
+                                                                            URL:tweetSearchURL
+                                                                     parameters:tweetSearchParameters];
+//        TWRequest *twitterTweetSearchRequest = [[TWRequest alloc] initWithURL:tweetSearchURL parameters:tweetSearchParameters requestMethod:TWRequestMethodGET];
         twitterTweetSearchRequest.account = self.currentTwitterUserAccount;
         [twitterTweetSearchRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
         {
@@ -124,9 +129,15 @@
         NSURL *tweetFavoriteURL = [NSURL URLWithString:tweetFavoriteURLString];
         NSDictionary *tweetFavoriteParameters = @{@"id":tweet.tweetID};
 
-        TWRequest *twitterFavoriteRequest = [[TWRequest alloc]initWithURL:tweetFavoriteURL
-                                                          parameters:tweetFavoriteParameters
-                                                       requestMethod:TWRequestMethodPOST];
+        SLRequest *twitterFavoriteRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                                requestMethod:SLRequestMethodGET
+                                                                          URL:tweetFavoriteURL
+                                                                   parameters:tweetFavoriteParameters];
+
+
+//        TWRequest *twitterFavoriteRequest = [[TWRequest alloc]initWithURL:tweetFavoriteURL
+//                                                               parameters:tweetFavoriteParameters
+//                                                        requestMethod:TWRequestMethodPOST];
         twitterFavoriteRequest.account = self.currentTwitterUserAccount;
 
         [twitterFavoriteRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
