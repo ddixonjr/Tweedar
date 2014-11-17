@@ -5,6 +5,33 @@
 </head>
 <body>
 <h1>Tweedar</h1>
+<p>Tweedar is a simple but cool demo/portfolio app that displays up to 100 tweets near your current location.  I coded it in response to a code challenge and, in line with good OO and iOS design patterns, created a clean separation of view/view controller responsibilties from those of the network interaction and model.</p>
+<p>The class reference documentation below describes those responsibilities along with the APIs that facilitate interaction between the classes that make up the app.</p>
+<p>Primary Frameworks, Classes, and Protocols Utilized:<br>
+<ul>
+<li>Foundation (NSArray, NSDictionary, )</li>
+<li>UIKit (UIViewController, UINavigationController, UIControl, etc.)</li>
+<li>MapKit (MKMapView, MKPointAnnotation, MKPinAnnotationView, MKMapViewDelegate)</li>
+<li>Core Location (CLGeocoder, CLLocationManager, CLLocation, CLPlacemark)</li>
+<li>Accounts (ACAccountStore, ACAccount, ACAccountType)</li>
+<li>Social (SLRequest)</li>
+</ul>
+</p>
+<p>Primary Design Patterns, Coding Techniques, and iOS Capabilities Utilized:<br>
+<ul>
+<li>MVC</li>
+<li>Target-Action</li>
+<li>ResponderChain/Chain of Responsibility</li>
+<li>Facade</li>
+<li>Factory Method</li>
+<li>Composite</li>
+<li>Delegation & Obj-C Protocols</li>
+<li>Basic GCD (dispatch_async(), dispatch_get_global_queue(), dispatch_get_main_queue())</li>
+<li>Obj-C Blocks</li>
+</ul>
+</p>
+<p>The class reference documentation below describes those responsibilities along with the APIs that facilitate interaction between the classes that make up the app.</p>
+<p><br></p>
 <h2>TDRTweetsController Class Reference</h2>
 <table cellspacing="0" cellpadding="0" class="t1">
   <tbody>
