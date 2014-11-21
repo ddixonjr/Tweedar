@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Tweedar</h1>
-<p>Tweedar is a simple but cool demo/portfolio app that displays tweets near your current location.  I coded it in response to a code challenge and, in line with good OO and iOS design patterns, created a clean separation of view/view controller responsibilties from those of the network interaction and model.</p>
+<p>Tweedar is a simple but cool demo/portfolio app that displays some of the tweets posted near your current location.  I coded it in response to a code challenge and, in line with good OO and iOS design patterns, created a clean separation of view/view controller responsibilties from those of the network interaction and model.</p>
 <p>The class reference documentation below describes those responsibilities along with the APIs that facilitate interaction between the classes that make up the app.</p>
 <p>Primary Frameworks, Classes, and Protocols Utilized:<br>
 <ul>
