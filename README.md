@@ -61,6 +61,7 @@
 <ul class="ul1">
   <li class="li6">  delegate<span class="s2"> </span><span class="s3">property</span></li>
   <li class="li6">  currentNumberOfTweets<span class="s2"> </span><span class="s3">property</span></li>
+  <li class="li6">– attemptTwitterAccessAuthorization</li>  
   <li class="li6">– tweetAtIndex:</li>
   <li class="li6">– startUpdatingTweetsForNewCoordinate:</li>
   <li class="li6">– toggleFavoriteForTweet:inBackgroundWithBlock:</li>
@@ -85,6 +86,15 @@
 <p class="p11">TDRTweetsController.h</p>
 <p class="p3"><br></p>
 <p class="p4">Instance Methods</p>
+<p class="p7">attemptTwitterAccessAuthorization</p>
+<p class="p8">Queries the local store of favorited tweet IDs to determine whether or not the tweet passed in is has been favorited.</p>
+<p class="p9">- (void)attemptTwitterAccessAuthorization</p>
+<p class="p8">Starts the attempt to authorize access to twitter via an existing Twitter account in the iOS account store. This method will call the either the didObtainTwitterAccountInTweetsController: or didFailToObtainTwitterAccountInTweetsController: delegate method based on its success or failure, respectively.</p>
+<p class="p10"><b>Discussion</b></p>
+<p class="p8">Starts the attempt to authorize access to twitter via an existing Twitter account in the iOS account store. This method will call the either the didObtainTwitterAccountInTweetsController: or didFailToObtainTwitterAccountInTweetsController: delegate method based on its success or failure, respectively.</p>
+<p class="p10"><b>Declared In</b></p>
+<p class="p11">TDRTweetsController.h</p>
+<p class="p12"><br></p>
 <p class="p7">isFavoritedTweet:</p>
 <p class="p8">Queries the local store of favorited tweet IDs to determine whether or not the tweet passed in is has been favorited.</p>
 <p class="p9">- (BOOL)isFavoritedTweet:(TDRTweet *)<i>tweet</i></p>
@@ -98,7 +108,7 @@
 <p class="p12"><br></p>
 <p class="p7">startUpdatingTweetsForNewCoordinate:</p>
 <p class="p8">Instructs the TDRTweetsController to query Twitter for tweets within a certain proximity of a specified geolocation.</p>
-<p class="p9">- (void)startUpdatingTweetsForNewCoordinate:(CLLocationCoordinate2D)<i>coordinate</i></p>
+<p class="p9">- (void)startUpdatingTweetsForCoordinate:(CLLocationCoordinate2D)<i>coordinate</i></p>
 <p class="p10"><b>Parameters</b></p>
 <p class="p13">coordinate</p>
 <p class="p8">The CLLocationCoordinate2D struct containing the target center geolocation around which the tweets should be located.</p>
