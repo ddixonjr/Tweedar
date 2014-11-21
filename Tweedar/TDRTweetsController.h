@@ -58,6 +58,13 @@
  */
 @property (assign, nonatomic) NSInteger currentNumberOfTweets;
 
+
+/**
+ *  Starts the attempt to authorize access to twitter via an existing Twitter account in the iOS account store.  This method will call the either the didObtainTwitterAccountInTweetsController: or didFailToObtainTwitterAccountInTweetsController: delegate method based on its success or failure, respectively.
+ */
+- (void)attemptTwitterAccessAuthorization;
+
+
 /**
  *  Retrieves the data model object that represents a single tweet in the current pool of tweets managed by TDRTweetsController.
  *
@@ -73,7 +80,7 @@
  *
  *  @param coordinate The CLLocationCoordinate2D struct containing the target center geolocation around which the tweets should be located.
  */
-- (void)startUpdatingTweetsForNewCoordinate:(CLLocationCoordinate2D)coordinate;
+- (void)startUpdatingTweetsForCoordinate:(CLLocationCoordinate2D)coordinate;
 
 
 /**

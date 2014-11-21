@@ -41,7 +41,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Tweets Near Me" id="ic2-Yg-9Vc"/>
                     <connections>
-                        <outlet property="refreshActivityView" destination="GDy-ef-1c5" id="3oF-yy-lFn"/>
+                        <outlet property="tweetRefreshActivityIndicatorView" destination="GDy-ef-1c5" id="L6f-F3-KUb"/>
                         <outlet property="tweetsMapView" destination="3Wi-Ve-vDM" id="v8I-yX-W5A"/>
                         <segue destination="SRF-8n-1eq" kind="show" identifier="TweetDetailSegue" id="YjA-lv-bpG"/>
                     </connections>

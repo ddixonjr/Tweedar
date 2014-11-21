@@ -24,7 +24,7 @@
 #define kIndexLat 0
 #define kIndexLon 1
 #define kZeroCoordinateArray @[@(0),@(0)]
-#define kMaxTweets @"100"
+#define kMaxTweets @"30"
 
 @interface TDRTweetsController ()
 
@@ -86,7 +86,36 @@
 }
 
 
-- (void)startUpdatingTweetsForNewCoordinate:(CLLocationCoordinate2D)coordinate;
+- (void)attemptTwitterAccessAuthorization
+{
+    ACAccountStore *accountStore = self.accountStore;
+    ACAccountType *twitterAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    [accountStore requestAccessToAccountsWithType:twitterAccountType options:nil completion:^(BOOL granted, NSError *error) {
+        if (granted)
+        {
+            NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
+            _currentTwitterUserAccount = [twitterAccounts firstObject];
+            if ([self.delegate respondsToSelector:@selector(didObtainTwitterAccountInTweetsController:)])
+            {
+                [self.delegate didObtainTwitterAccountInTweetsController:self];
+                self.favorites = [NSMutableArray arrayWithContentsOfURL:self.favoritesPlistURL];
+                if (!self.favorites)
+                {
+                    self.favorites = [NSMutableArray array];
+                }
+            }
+        }
+        else
+        {
+            if ([self.delegate respondsToSelector:@selector(didFailToObtainTwitterAccountInTweetsController:)])
+            {
+                [self.delegate didFailToObtainTwitterAccountInTweetsController:self];
+            }
+        }
+    }];
+}
+
+- (void)startUpdatingTweetsForCoordinate:(CLLocationCoordinate2D)coordinate;
 {
     dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async(backgroundQueue, ^{
