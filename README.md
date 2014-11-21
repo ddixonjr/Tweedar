@@ -85,7 +85,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetsController.h</p>
 <p class="p3"><br></p>
-<p class="p4">Instance Methods</p>
+<p class="p4"><b>Instance Methods</b></p>
 <p class="p7"><b>attemptTwitterAccessAuthorization</b></p>
 <p class="p8">Queries the local store of favorited tweet IDs to determine whether or not the tweet passed in is has been favorited.</p>
 <p class="p9">- (void)attemptTwitterAccessAuthorization</p>
