@@ -69,7 +69,7 @@
 </ul>
 <p class="p3"><br></p>
 <p class="p4"><b>Properties</b></p>
-<p class="p7">currentNumberOfTweets</p>
+<p class="p7"><b>currentNumberOfTweets</b></p>
 <p class="p8">The number of tweets currently loaded and managed by an instance of TDRTweetsController.</p>
 <p class="p9">@property (assign, nonatomic) NSInteger currentNumberOfTweets</p>
 <p class="p10"><b>Discussion</b></p>
@@ -77,7 +77,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetsController.h</p>
 <p class="p12"><br></p>
-<p class="p7">delegate</p>
+<p class="p7"><b>delegate</b></p>
 <p class="p8">Reference to the object assigned to be the delegate of an instance of TDRTweetsController.</p>
 <p class="p9">@property (weak, nonatomic) id&lt;TweetControllerDelegate&gt; delegate</p>
 <p class="p10"><b>Discussion</b></p>
@@ -86,7 +86,7 @@
 <p class="p11">TDRTweetsController.h</p>
 <p class="p3"><br></p>
 <p class="p4">Instance Methods</p>
-<p class="p7">attemptTwitterAccessAuthorization</p>
+<p class="p7"><b>attemptTwitterAccessAuthorization</b></p>
 <p class="p8">Queries the local store of favorited tweet IDs to determine whether or not the tweet passed in is has been favorited.</p>
 <p class="p9">- (void)attemptTwitterAccessAuthorization</p>
 <p class="p8">Starts the attempt to authorize access to twitter via an existing Twitter account in the iOS account store. This method will call the either the didObtainTwitterAccountInTweetsController: or didFailToObtainTwitterAccountInTweetsController: delegate method based on its success or failure, respectively.</p>
@@ -95,7 +95,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetsController.h</p>
 <p class="p12"><br></p>
-<p class="p7">isFavoritedTweet:</p>
+<p class="p7"><b>isFavoritedTweet:</b></p>
 <p class="p8">Queries the local store of favorited tweet IDs to determine whether or not the tweet passed in is has been favorited.</p>
 <p class="p9">- (BOOL)isFavoritedTweet:(TDRTweet *)<i>tweet</i></p>
 <p class="p10"><b>Parameters</b></p>
@@ -106,7 +106,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetsController.h</p>
 <p class="p12"><br></p>
-<p class="p7">startUpdatingTweetsForNewCoordinate:</p>
+<p class="p7"><b>startUpdatingTweetsForNewCoordinate:</b></p>
 <p class="p8">Instructs the TDRTweetsController to query Twitter for tweets within a certain proximity of a specified geolocation.</p>
 <p class="p9">- (void)startUpdatingTweetsForCoordinate:(CLLocationCoordinate2D)<i>coordinate</i></p>
 <p class="p10"><b>Parameters</b></p>
@@ -117,7 +117,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetsController.h</p>
 <p class="p12"><br></p>
-<p class="p7">toggleFavoriteForTweet:inBackgroundWithBlock:</p>
+<p class="p7"><b>toggleFavoriteForTweet:inBackgroundWithBlock:</b></p>
 <p class="p8">Uses the Twitter Framework to toggle the favorite status of a tweet for the user currently logged.</p>
 <p class="p9">- (void)toggleFavoriteForTweet:(TDRTweet *)<i>tweet</i> inBackgroundWithBlock:(void ( ^ ) ( BOOL success , NSError *error ))<i>completion</i></p>
 <p class="p10"><b>Parameters</b></p>
@@ -130,7 +130,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetsController.h</p>
 <p class="p12"><br></p>
-<p class="p7">tweetAtIndex:</p>
+<p class="p7"><b>tweetAtIndex:</b></p>
 <p class="p8">Retrieves the data model object that represents a single tweet in the current pool of tweets managed by TDRTweetsController.</p>
 <p class="p9">- (TDRTweet *)tweetAtIndex:(NSInteger)<i>index</i></p>
 <p class="p10"><b>Parameters</b></p>
@@ -177,7 +177,7 @@
 </ul>
 <p class="p3"><br></p>
 <p class="p4"><b>Instance Methods</b></p>
-<p class="p7">didFailToObtainTwitterAccountInTweetsController:</p>
+<p class="p7"><b>didFailToObtainTwitterAccountInTweetsController:</b></p>
 <p class="p8">A delegate method called to indicate when user permission to access Twitter accounts has failed.</p>
 <p class="p9">- (void)didFailToObtainTwitterAccountInTweetsController:(TDRTweetsController *)<i>tweetsController</i></p>
 <p class="p10"><b>Parameters</b></p>
@@ -188,7 +188,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetsController.h</p>
 <p class="p12"><br></p>
-<p class="p7">didObtainTwitterAccountInTweetsController:</p>
+<p class="p7"><b>didObtainTwitterAccountInTweetsController:</b></p>
 <p class="p8">A delegate method called to indicate when user permission to access Twitter accounts has completed.</p>
 <p class="p9">- (void)didObtainTwitterAccountInTweetsController:(TDRTweetsController *)<i>tweetsController</i></p>
 <p class="p10"><b>Parameters</b></p>
@@ -199,7 +199,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetsController.h</p>
 <p class="p12"><br></p>
-<p class="p7">tweetsDidChangeInTweetsController:</p>
+<p class="p7"><b>tweetsDidChangeInTweetsController:</b></p>
 <p class="p8">A delegate method called to indicate when a request for tweets (as started by a call to the startUpdatingTweetsForNewCoordinate: method) has completed.</p>
 <p class="p9">- (void)tweetsDidChangeInTweetsController:(TDRTweetsController *)<i>tweetsController</i></p>
 <p class="p10"><b>Parameters</b></p>
@@ -251,7 +251,7 @@
 </ul>
 <p class="p3"><br></p>
 <p class="p4"><b>Properties</b></p>
-<p class="p7">avatarURLString</p>
+<p class="p7"><b>avatarURLString</b></p>
 <p class="p8">The URL of the avatar image for the Twitter user who posted the tweet represented by the new instance of TDRTweet.</p>
 <p class="p9">@property (strong, nonatomic) NSString *avatarURLString</p>
 <p class="p10"><b>Discussion</b></p>
@@ -259,7 +259,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweet.h</p>
 <p class="p12"><br></p>
-<p class="p7">coordinate</p>
+<p class="p7"><b>coordinate</b></p>
 <p class="p8">The CLLocationCoordinate2D struct storing the posting location the tweet represented by the new instance of TDRTweet.</p>
 <p class="p9">@property (assign, nonatomic) CLLocationCoordinate2D coordinate</p>
 <p class="p10"><b>Discussion</b></p>
@@ -267,7 +267,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweet.h</p>
 <p class="p12"><br></p>
-<p class="p7">dateString</p>
+<p class="p7"><b>dateString</b></p>
 <p class="p8">A string specifying the date of the tweet represented by the new instance of TDRTweet.</p>
 <p class="p9">@property (strong, nonatomic) NSString *dateString</p>
 <p class="p10"><b>Discussion</b></p>
@@ -283,7 +283,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweet.h</p>
 <p class="p12"><br></p>
-<p class="p7">tweetText</p>
+<p class="p7"><b>tweetText</b></p>
 <p class="p8">The actual content of the tweet represented by the new instance of TDRTweet.</p>
 <p class="p9">@property (strong, nonatomic) NSString *tweetText</p>
 <p class="p10"><b>Discussion</b></p>
@@ -291,7 +291,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweet.h</p>
 <p class="p12"><br></p>
-<p class="p7">userHandle</p>
+<p class="p7"><b>userHandle</b></p>
 <p class="p8">The user handle of the tweet.</p>
 <p class="p9">@property (strong, nonatomic) NSString *userHandle</p>
 <p class="p10"><b>Discussion</b></p>
@@ -301,7 +301,7 @@
 <p class="p14"><br></p>
 <p class="p15"><br></p>
 <p class="p4"><b>Instance Methods</b></p>
-<p class="p7">initWithUserHandle:tweetID:tweetText:timestamp:latitude:longitude:</p>
+<p class="p7"><b>initWithUserHandle:tweetID:tweetText:timestamp:latitude:longitude:</b></p>
 <p class="p8">&lt;#Description#&gt;</p>
 <p class="p9">- (instancetype)initWithUserHandle:(NSString *)<i>userHandle</i> tweetID:(NSString *)<i>tweetID</i> tweetText:(NSString *)<i>tweetText</i> timestamp:(NSString *)<i>dateString</i> latitude:(NSNumber *)<i>latitude</i> longitude:(NSNumber *)<i>longitude</i></p>
 <p class="p10"><b>Parameters</b></p>
@@ -385,7 +385,7 @@
 </ul>
 <p class="p3"><br></p>
 <p class="p4"><b>Properties</b></p>
-<p class="p7">tweet</p>
+<p class="p7"><b>tweet</b></p>
 <p class="p8">The TDRTweet instance passed in for it’s details to be displayed.</p>
 <p class="p9">@property (strong, nonatomic) TDRTweet *tweet</p>
 <p class="p10"><b>Discussion</b></p>
@@ -393,7 +393,7 @@
 <p class="p10"><b>Declared In</b></p>
 <p class="p11">TDRTweetDetailViewController.h</p>
 <p class="p12"><br></p>
-<p class="p7">tweetsController</p>
+<p class="p7"><b>tweetsController</b></p>
 <p class="p8">The instance of TDRTweetsController to interact with during operations to change the favorite status of the <span class="s1">tweet</span> being displayed.</p>
 <p class="p9">@property (strong, nonatomic) TDRTweetsController *tweetsController</p>
 <p class="p10"><b>Discussion</b></p>
